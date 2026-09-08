@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AT MY - Live Promo Command Centre</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        at: {
+                            navy: '#002244',
+                            blue: '#0055A5',
+                            yellow: '#FFB800',
+                            orange: '#FF5A00',
+                            red: '#E51937',
+                            gray: '#F4F6F9',
+                            dark: '#0F172A',
+                            shopee: '#EE4D2D',
+                            tiktok: '#000000',
+                            tiktokPink: '#FE2C55',
+                            tiktokCyan: '#25F4EE'
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 4px 20px -2px rgba(0, 34, 68, 0.08)',
+                        'card-hover': '0 12px 30px -4px rgba(0, 34, 68, 0.15)',
+                        'glow-orange': '0 0 20px rgba(255, 90, 0, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F5F9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #CBD5E1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94A3B8;
+        }
+
+        @keyframes livePulse {
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.08);
+            }
+        }
+        .live-dot {
+            animation: livePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        .standard-promo-card {
+            background-color: #ffffff;
+            padding: 1.25rem;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .standard-promo-card .icon-wrap {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        .standard-promo-card .label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .standard-promo-card .amount {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #0f172a;
+            margin-top: 0.25rem;
+        }
+        .standard-promo-card .detail {
+            font-size: 0.75rem;
+            color: #475569;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        /* Force table to scroll on mobile instead of breaking */
+        .table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .table-wrapper table {
+            min-width: 600px;
+            width: 100%;
+        }
+        @media (max-width: 640px) {
+            .table-wrapper table {
+                min-width: 500px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-20">
+
+    <!-- Top Header Navigation -->
+    <header class="sticky top-0 z-40 bg-at-navy text-white shadow-lg border-b border-slate-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <div class="bg-at-yellow text-at-navy px-2.5 py-1 rounded-lg font-black tracking-wider text-sm flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-suitcase-rolling"></i>
+                    <span>AT MY</span>
+                </div>
+                <div>
+                    <h1 class="text-sm sm:text-lg font-extrabold tracking-tight flex items-center gap-2">
+                        PROMO COMMAND CENTRE
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-300 border border-red-500/30">
+                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1 live-dot"></span> LIVE
+                        </span>
+                    </h1>
+                    <p class="text-[10px] sm:text-xs text-slate-300 hidden sm:block">Live Promo & Selling Guide for Hosts, Mods & Ops</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-4 text-xs">
+                <div class="bg-slate-800/80 border border-slate-700 px-2 sm:px-3 py-1 rounded-lg flex items-center space-x-2 text-slate-300">
+                    <i class="fa-regular fa-clock text-at-yellow"></i>
+                    <span>Updated: <strong id="last-updated-time" class="text-white">Loading...</strong></span>
+                </div>
+                <div class="bg-at-orange/20 border border-at-orange/40 text-at-orange px-2 sm:px-3 py-1 rounded-lg font-bold text-[10px] sm:text-xs">
+                    Campaign: 9.9 Super Shopping
+                </div>
+                <span class="bg-amber-400/20 text-amber-300 border border-amber-400/30 px-2 py-1 rounded-md text-[10px] font-black uppercase tracking-wider hidden lg:inline-block">
+                    INTERNAL USE ONLY
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sticky Platform Control Bar -->
+    <div class="sticky top-[57px] z-30 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm py-2.5 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-3">
+
+            <div class="flex items-center bg-slate-100 p-1 rounded-2xl border border-slate-200 w-full md:w-auto shadow-inner">
+                <button id="btn-platform-shopee" onclick="switchPlatform('shopee')" class="flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-at-shopee text-white shadow-md">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>SHOPEE</span>
+                    <span class="text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full uppercase">Primary</span>
+                </button>
+                <button id="btn-platform-tiktok" onclick="switchPlatform('tiktok')" class="flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900">
+                    <i class="fa-brands fa-tiktok"></i>
+                    <span>TIKTOK</span>
+                </button>
+            </div>
+
+            <div class="hidden md:block w-72"></div>
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD CONTENT WRAPPER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4 sm:mt-6 space-y-8 sm:space-y-10">
+
+        <!-- 1. HERO / QUICK SUMMARY SECTION -->
+        <section id="hero-summary-section" class="bg-gradient-to-br from-at-navy via-slate-900 to-at-blue text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-card relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 opacity-10 pointer-events-none">
+                <i class="fa-solid fa-plane-departure text-[150px] sm:text-[200px] lg:text-[240px]"></i>
+            </div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-4 md:mb-6 gap-3 border-b border-white/10 pb-3 md:pb-4">
+                    <div>
+                        <span class="text-at-yellow font-extrabold uppercase tracking-widest text-[10px] sm:text-xs mb-1 block">Live Operations Quick Reference</span>
+                        <h2 class="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">WHAT'S ON PROMO?</h2>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl">
+                            Everything the LIVE team needs to know — mechanics, vouchers, product eligibility & shipping thresholds at a glance.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span id="platform-indicator-badge" class="px-2 sm:px-3 py-1 bg-at-shopee text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm">
+                            Viewing: SHOPEE PLAN
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
+
+                    <a href="#bundle-section" class="group bg-white/10 hover:bg-white/20 border border-white/15 hover:border-at-yellow transition-all p-3 sm:p-4 rounded-2xl flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="flex items-center justify-between text-at-yellow text-[10px] font-bold mb-1">
+                                <span>HERO PROMO</span>
+                                <i class="fa-solid fa-layer-group group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                            <div class="text-sm sm:text-base md:text-lg font-black text-white leading-tight">BUY 2 OR MORE</div>
+                            <div class="text-[10px] sm:text-xs text-at-yellow font-bold mt-1">ADDITIONAL 20% OFF</div>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                            <span>Squasem + Instagon</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </a>
+
+                    <a href="#vouchers-section" class="group bg-white/10 hover:bg-white/20 border border-white/15 hover:border-at-yellow transition-all p-3 sm:p-4 rounded-2xl flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="flex items-center justify-between text-emerald-400 text-[10px] font-bold mb-1">
+                                <span>NEW CUSTOMER</span>
+                                <i class="fa-solid fa-user-plus group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                            <div class="text-sm sm:text-base md:text-lg font-black text-white leading-tight">RM20 OFF</div>
+                            <div class="text-[10px] sm:text-xs text-emerald-300 font-medium mt-1">Min. spend RM200</div>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                            <span>New Buyer VC</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </a>
+
+                    <a href="#vouchers-section" class="group bg-white/10 hover:bg-white/20 border border-white/15 hover:border-at-yellow transition-all p-3 sm:p-4 rounded-2xl flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="flex items-center justify-between text-amber-300 text-[10px] font-bold mb-1">
+                                <span>SELLER VOUCHER</span>
+                                <i class="fa-solid fa-ticket group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                            <div class="text-sm sm:text-base md:text-lg font-black text-white leading-tight">UP TO 20% OFF</div>
+                            <div class="text-[10px] sm:text-xs text-amber-200 font-medium mt-1">10% / 15% / 20% VCs</div>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                            <span>Selected Luggage</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </a>
+
+                    <a href="#flexi-section" class="group bg-white/10 hover:bg-white/20 border border-white/15 hover:border-at-yellow transition-all p-3 sm:p-4 rounded-2xl flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="flex items-center justify-between text-sky-300 text-[10px] font-bold mb-1">
+                                <span>FLEXI COMBO</span>
+                                <i class="fa-solid fa-boxes-packing group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                            <div class="text-sm sm:text-base md:text-lg font-black text-white leading-tight">BUY 2 GET 20%</div>
+                            <div class="text-[10px] sm:text-xs text-sky-200 font-medium mt-1">Storewide Eligibility</div>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                            <span>Auto discount</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </a>
+
+                    <a href="#shipping-section" class="group bg-white/10 hover:bg-white/20 border border-white/15 hover:border-at-yellow transition-all p-3 sm:p-4 rounded-2xl flex flex-col justify-between cursor-pointer">
+                        <div>
+                            <div class="flex items-center justify-between text-purple-300 text-[10px] font-bold mb-1">
+                                <span>FREE SHIPPING</span>
+                                <i class="fa-solid fa-truck-fast group-hover:translate-x-0.5 transition-transform"></i>
+                            </div>
+                            <div class="text-sm sm:text-base md:text-lg font-black text-white leading-tight">UP TO RM80 OFF</div>
+                            <div class="text-[10px] sm:text-xs text-purple-200 font-medium mt-1">RM500 / RM800 Spend</div>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-white/10 text-[10px] text-slate-300 flex items-center justify-between">
+                            <span>Nationwide</span>
+                            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. SHOPEE PROMO PLAN CONTAINER -->
+        <div id="shopee-plan-container" class="space-y-8 transition-all duration-300">
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-at-shopee pb-3 gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-at-shopee text-white flex items-center justify-center font-black text-base sm:text-xl shadow-md">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">SHOPEE PROMO PLAN</h2>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Official campaign mechanics & seller vouchers for Shopee Malaysia</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center bg-slate-200 p-1 rounded-2xl self-start md:self-auto overflow-x-auto w-full md:w-auto">
+                    <button id="shopee-tab-d1" onclick="switchShopeeDate('6-8-9')" class="px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-white text-at-shopee shadow-sm whitespace-nowrap">
+                        <i class="fa-regular fa-calendar-days mr-1"></i> 6, 8–9 SEPT
+                    </button>
+                    <button id="shopee-tab-d2" onclick="switchShopeeDate('7-10-11')" class="px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                        <i class="fa-regular fa-calendar-check mr-1"></i> 7, 10–11 SEPT
+                    </button>
+                </div>
+            </div>
+
+            <!-- HERO BUNDLE -->
+            <section id="bundle-section" class="promo-card bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-2xl sm:rounded-3xl border-2 border-at-shopee/30 p-4 sm:p-6 shadow-md relative overflow-hidden" data-category="BUNDLE">
+                <div class="absolute top-0 right-0 bg-at-shopee text-white text-[10px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-bl-2xl shadow-sm">
+                    🔥 HERO PROMOTION MECHANIC
+                </div>
+
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
+                    <div class="flex-1 space-y-3">
+                        <div class="inline-flex items-center space-x-2 bg-at-shopee/10 text-at-shopee px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>CAMPAIGN: BUNDLE UP & SAVE</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">BUY 2 OR MORE → <span class="text-at-shopee">EXTRA 20% OFF</span></h3>
+                        <p class="text-[10px] sm:text-xs text-slate-600 font-medium">
+                            <i class="fa-solid fa-calendar-day text-at-shopee mr-1"></i> Period: <strong>31 July – Further Notice</strong> | Applicable on bundled hero luggage combinations.
+                        </p>
+
+                        <div class="mt-4 p-3 sm:p-4 bg-white rounded-2xl border border-orange-100 shadow-sm flex flex-wrap items-center justify-center sm:justify-around gap-3 text-center">
+                            <div class="flex items-center space-x-2 sm:space-x-3">
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-slate-50 border border-slate-200 p-1 flex items-center justify-center">
+                                    <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0a4102eb/images/squasem-exp-tsa-v2/hi-res/156704-1577_hi-res_FRONT34_1.jpg?sw=200" alt="Squasem" class="max-h-full object-contain" onerror="this.src='https://placehold.co/100x100/f1f5f9/002244?text=SQUASEM'">
+                                </div>
+                                <span class="text-xl font-black text-slate-400">+</span>
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-slate-50 border border-slate-200 p-1 flex items-center justify-center">
+                                    <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=200" alt="Instagon" class="max-h-full object-contain" onerror="this.src='https://placehold.co/100x100/f1f5f9/002244?text=INSTAGON'">
+                                </div>
+                            </div>
+                            <div class="text-2xl font-black text-slate-300">→</div>
+                            <div class="bg-at-shopee/10 border border-at-shopee/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl">
+                                <span class="text-[10px] font-bold text-slate-500 uppercase block">Condition</span>
+                                <span class="text-xs sm:text-base font-black text-at-shopee">BUY 2+ ITEMS</span>
+                            </div>
+                            <div class="text-2xl font-black text-slate-300">→</div>
+                            <div class="bg-at-shopee text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl shadow-md">
+                                <span class="text-[8px] sm:text-[10px] font-bold uppercase tracking-wider block opacity-90">Discount</span>
+                                <span class="text-sm sm:text-base md:text-lg font-black">20% OFF TOTAL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-48 xl:w-72 bg-white rounded-2xl p-3 sm:p-4 border border-slate-200 text-center shadow-sm flex flex-col items-center">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">Eligible Hero Pair</span>
+                        <div class="flex items-center justify-center space-x-2 my-2">
+                            <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0a4102eb/images/squasem-exp-tsa-v2/hi-res/156704-1577_hi-res_FRONT34_1.jpg?sw=300" class="h-20 sm:h-24 lg:h-28 object-contain" alt="Squasem Luggage" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=SQUASEM'">
+                            <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=300" class="h-20 sm:h-24 lg:h-28 object-contain" alt="Instagon Luggage" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=INSTAGON'">
+                        </div>
+                        <div class="text-xs font-extrabold text-slate-800">SQUASEM + INSTAGON</div>
+                        <span class="text-[10px] sm:text-[11px] text-at-shopee font-semibold mt-0.5">Perfect Live Up-Sell Bundle</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DYNAMIC DATE SECTION: SHOPEE 6, 8-9 SEPT -->
+            <div id="shopee-date-content-6-8-9" class="shopee-date-view space-y-6 sm:space-y-8">
+
+                <div class="flex items-center space-x-2 text-slate-800 font-extrabold text-base sm:text-lg">
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-at-shopee"></span>
+                    <h3>PROMOTIONS ACTIVE FOR: <span class="text-at-shopee">6, 8–9 SEPT</span></h3>
+                </div>
+
+                <!-- NEW CUSTOMER VOUCHERS -->
+                <div id="vouchers-section" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">🎟️</div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="label text-emerald-600">NEW FOLLOWER — BAU</span>
+                                <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded">Storewide</span>
+                            </div>
+                            <div class="amount">RM10 OFF</div>
+                            <p class="detail">Welcome voucher for new store followers.</p>
+                        </div>
+                    </div>
+
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">👤</div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="label text-emerald-600">NEW BUYER VOUCHER</span>
+                                <span class="text-[10px] bg-red-100 text-red-600 font-bold px-2 py-0.5 rounded">Exclude VB</span>
+                            </div>
+                            <div class="amount">RM20 OFF</div>
+                            <p class="detail">Min. Spend: <strong>RM200</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SELLER VOUCHERS -->
+                <div class="space-y-3">
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-tags text-at-shopee"></i> SELLER VOUCHERS (6, 8–9 SEPT)
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="promo-card bg-gradient-to-b from-white to-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between" data-category="VOUCHER">
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] font-bold text-slate-500 mb-2">
+                                    <span>TIER 1 SELLER VC</span>
+                                    <span class="bg-slate-200 text-slate-700 px-2 py-0.5 rounded text-[10px]">No Min Spend</span>
+                                </div>
+                                <div class="text-2xl sm:text-3xl font-black text-slate-900">10% OFF</div>
+                                <div class="mt-3 p-2.5 bg-red-50 rounded-xl border border-red-100 text-xs">
+                                    <span class="font-bold text-red-600 block mb-0.5"><i class="fa-solid fa-triangle-exclamation"></i> Excludes:</span>
+                                    <span class="text-slate-700">BUS & Accessories</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="promo-card bg-gradient-to-b from-white to-amber-50/40 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 shadow-sm flex flex-col justify-between" data-category="VOUCHER">
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] font-bold text-amber-700 mb-2">
+                                    <span>TIER 2 SELLER VC</span>
+                                    <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px]">No Min Spend</span>
+                                </div>
+                                <div class="text-2xl sm:text-3xl font-black text-amber-600">15% OFF</div>
+                                <div class="mt-3 space-y-1 text-xs">
+                                    <span class="font-bold text-slate-800 block">Eligible Lineup:</span>
+                                    <ul class="space-y-1 text-slate-600 text-[11px] list-disc list-inside">
+                                        <li>Regular Price Items</li>
+                                        <li>Rinia, Curio, Ellen</li>
+                                        <li>Linex — BUS colour</li>
+                                        <li>Large Curvus Coffee</li>
+                                        <li>Large Fastforward (Steel Blue / Sunset Coral)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="promo-card bg-gradient-to-b from-white to-orange-50 p-4 sm:p-5 rounded-2xl border-2 border-at-shopee/40 shadow-sm flex flex-col justify-between" data-category="VOUCHER">
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] font-bold text-at-shopee mb-2">
+                                    <span>TIER 3 SELLER VC</span>
+                                    <span class="bg-orange-100 text-at-shopee px-2 py-0.5 rounded text-[10px]">High Value</span>
+                                </div>
+                                <div class="text-2xl sm:text-3xl font-black text-at-shopee">20% OFF</div>
+                                <div class="mt-3 text-xs">
+                                    <span class="font-bold text-slate-800 block mb-1">Eligible Products:</span>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span class="bg-orange-100 text-orange-800 font-extrabold px-2.5 py-1 rounded-lg text-[10px] sm:text-xs">Ellen</span>
+                                        <span class="bg-orange-100 text-orange-800 font-extrabold px-2.5 py-1 rounded-lg text-[10px] sm:text-xs">Dashpop</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COFUND & PLATFORM VOUCHERS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-extrabold text-blue-600 uppercase">COFUND VOUCHER 15%</span>
+                        <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">15% OFF</div>
+                        <div class="text-[10px] sm:text-xs font-bold text-slate-600 mt-0.5">Min Spend RM600 | Cap RM100</div>
+                        <div class="mt-3 p-2 bg-slate-100 rounded-lg text-[11px] text-slate-500">
+                            <strong>Exclude:</strong> BUS, VB, Accessories
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-100 text-xs font-extrabold text-slate-700 flex justify-between">
+                            <span>RM600 SPEND</span>
+                            <span class="text-emerald-600">SAVE RM100</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-extrabold text-blue-600 uppercase">COFUND VOUCHER 20%</span>
+                        <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">20% OFF</div>
+                        <div class="text-[10px] sm:text-xs font-bold text-slate-600 mt-0.5">Min Spend RM800 | Cap RM200</div>
+                        <div class="mt-3 p-2 bg-slate-100 rounded-lg text-[11px] text-slate-500">
+                            <strong>Exclude:</strong> BUS, VB, Accessories
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-slate-100 text-xs font-extrabold text-slate-700 flex justify-between">
+                            <span>RM800 SPEND</span>
+                            <span class="text-emerald-600">SAVE RM200</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-card bg-emerald-50/60 p-4 sm:p-5 rounded-2xl border-2 border-emerald-300 shadow-sm flex flex-col justify-between" data-category="VOUCHER">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-[10px] font-bold text-emerald-700 uppercase">PLATFORM VOUCHER</span>
+                                <span class="bg-emerald-600 text-white font-black text-[10px] px-2.5 py-0.5 rounded-full shadow-sm">APPROVED</span>
+                            </div>
+                            <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">RM15 OFF</div>
+                            <div class="text-[10px] sm:text-xs text-slate-600 font-bold mt-1">No Minimum Spend</div>
+                        </div>
+                        <div class="mt-3 p-2 bg-white rounded-lg text-[11px] text-slate-600 border border-emerald-200">
+                            <i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Excludes Accessories only.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLEXI COMBO & FREE SHIPPING -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div id="flexi-section" class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4" data-category="FLEXI COMBO">
+                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl sm:text-2xl font-black shrink-0">
+                            📦
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-extrabold text-sky-600 uppercase">FLEXI COMBO MECHANIC</span>
+                            <div class="text-lg sm:text-2xl font-black text-slate-900">BUY 2 GET 20% OFF</div>
+                            <p class="text-[10px] sm:text-xs text-slate-500 mt-0.5">Storewide eligibility across luggage categories.</p>
+                        </div>
+                    </div>
+
+                    <div id="shipping-section" class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4" data-category="FREE SHIPPING">
+                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl sm:text-2xl font-black shrink-0">
+                            🚚
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-[10px] font-extrabold text-purple-600 uppercase">SHOPEE NATIONWIDE SHIPPING</span>
+                            <div class="text-base sm:text-lg font-black text-slate-900 mt-0.5">Free Shipping Benefit Thresholds</div>
+                            <div class="mt-2 text-[10px] sm:text-xs space-y-1">
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM500 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM50</strong>
+                                </div>
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM800 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM80</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SHOPEE 7, 10–11 SEPT (HIDDEN BY DEFAULT) -->
+            <div id="shopee-date-content-7-10-11" class="shopee-date-view space-y-6 sm:space-y-8 hidden">
+
+                <div class="flex items-center space-x-2 text-slate-800 font-extrabold text-base sm:text-lg">
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-at-shopee"></span>
+                    <h3>PROMOTIONS ACTIVE FOR: <span class="text-at-shopee">7, 10–11 SEPT</span></h3>
+                </div>
+
+                <!-- NEW CUSTOMER VOUCHERS -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">🎟️</div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="label text-emerald-600">NEW FOLLOWER — BAU</span>
+                                <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded">Storewide</span>
+                            </div>
+                            <div class="amount">RM10 OFF</div>
+                            <p class="detail">Storewide new follower reward.</p>
+                        </div>
+                    </div>
+
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">👤</div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <span class="label text-emerald-600">NEW BUYER VOUCHER</span>
+                                <span class="text-[10px] bg-red-100 text-red-600 font-bold px-2 py-0.5 rounded">Exclude VB</span>
+                            </div>
+                            <div class="amount">RM20 OFF</div>
+                            <p class="detail">Min. Spend: <strong>RM200</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STORE VOUCHER -->
+                <div class="space-y-3">
+                    <h4 class="text-xs sm:text-sm font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-store text-at-shopee"></i> STORE VOUCHERS (7, 10–11 SEPT)
+                    </h4>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="promo-card bg-gradient-to-b from-white to-amber-50/40 p-4 sm:p-5 rounded-2xl border-2 border-amber-300 shadow-sm" data-category="VOUCHER">
+                            <div class="flex items-center justify-between text-[10px] font-bold text-amber-700 mb-2">
+                                <span>STORE VOUCHER TIER 1</span>
+                                <span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px]">No Min Spend</span>
+                            </div>
+                            <div class="text-2xl sm:text-3xl font-black text-amber-600">15% OFF</div>
+                            <div class="mt-3 text-xs space-y-1">
+                                <span class="font-bold text-slate-800 block">Eligible Products:</span>
+                                <ul class="list-disc list-inside text-slate-600 text-[11px] space-y-0.5">
+                                    <li>Rinia, Curio, Ellen</li>
+                                    <li>Linex — BUS colour</li>
+                                    <li>Large Curvus Coffee</li>
+                                    <li>Large Fastforward — Steel Blue & Sunset Coral</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="promo-card bg-gradient-to-b from-white to-orange-50 p-4 sm:p-5 rounded-2xl border-2 border-at-shopee/40 shadow-sm" data-category="VOUCHER">
+                            <div class="flex items-center justify-between text-[10px] font-bold text-at-shopee mb-2">
+                                <span>STORE VOUCHER TIER 2</span>
+                                <span class="bg-orange-100 text-at-shopee px-2 py-0.5 rounded text-[10px]">No Min Spend</span>
+                            </div>
+                            <div class="text-2xl sm:text-3xl font-black text-at-shopee">20% OFF</div>
+                            <div class="mt-3 text-xs">
+                                <span class="font-bold text-slate-800 block mb-1">Eligible Products:</span>
+                                <div class="flex gap-2">
+                                    <span class="bg-orange-100 text-orange-800 font-extrabold px-3 py-1 rounded-lg text-[10px] sm:text-xs">Ellen</span>
+                                    <span class="bg-orange-100 text-orange-800 font-extrabold px-3 py-1 rounded-lg text-[10px] sm:text-xs">Dashpop</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COFUND & PLATFORM VOUCHERS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-extrabold text-blue-600 uppercase">COFUND VOUCHER 15%</span>
+                        <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">15% OFF</div>
+                        <div class="text-[10px] sm:text-xs text-slate-600 font-bold mt-0.5">Min Spend RM600 | Cap RM100</div>
+                        <div class="mt-2 text-[11px] text-slate-500">Exclude: BUS, VB, Accessories</div>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-extrabold text-blue-600 uppercase">COFUND VOUCHER 20%</span>
+                        <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">20% OFF</div>
+                        <div class="text-[10px] sm:text-xs text-slate-600 font-bold mt-0.5">Min Spend RM800 | Cap RM200</div>
+                        <div class="mt-2 text-[11px] text-slate-500">Exclude: BUS, VB, Accessories</div>
+                    </div>
+
+                    <div class="promo-card bg-emerald-50/60 p-4 sm:p-5 rounded-2xl border-2 border-emerald-300 shadow-sm" data-category="VOUCHER">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] font-bold text-emerald-700 uppercase">PLATFORM VC</span>
+                            <span class="bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded">APPROVED</span>
+                        </div>
+                        <div class="text-xl sm:text-2xl font-black text-slate-900 mt-1">RM15 OFF</div>
+                        <div class="text-[10px] sm:text-xs text-slate-600 mt-0.5">No Minimum Spend (Exclude Accessories)</div>
+                    </div>
+                </div>
+
+                <!-- FLEXI COMBO & FREE SHIPPING -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="FLEXI COMBO">
+                        <span class="text-[10px] font-extrabold text-sky-600 uppercase">FLEXI COMBO</span>
+                        <div class="text-lg sm:text-2xl font-black text-slate-900 mt-1">BUY 2 GET 20% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Storewide eligibility.</p>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="FREE SHIPPING">
+                        <span class="text-[10px] font-extrabold text-purple-600 uppercase">SHOPEE NATIONWIDE SHIPPING</span>
+                        <div class="text-sm sm:text-base font-black text-slate-900 mt-1">Free Shipping Benefit Thresholds</div>
+                        <div class="text-[10px] sm:text-xs space-y-1 mt-1">
+                            <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                <span>RM500 Min Spend:</span>
+                                <strong class="text-purple-700">Capped at RM50</strong>
+                            </div>
+                            <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                <span>RM800 Min Spend:</span>
+                                <strong class="text-purple-700">Capped at RM80</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FLASH SALE SECTION (7, 10-11 SEPT ONLY) -->
+                <div id="flash-sale-section" class="promo-card bg-gradient-to-r from-red-600 via-at-red to-orange-600 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-lg relative" data-category="FLASH SALE">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-yellow-400 text-red-700 flex items-center justify-center font-black text-lg sm:text-xl animate-bounce">
+                            ⚡
+                        </div>
+                        <div>
+                            <span class="bg-yellow-400 text-red-900 font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">LIMITED TIME DEAL</span>
+                            <h3 class="text-lg sm:text-2xl font-black tracking-tight">SPECIAL FLASH SALE DEALS</h3>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                        <div class="bg-white text-slate-900 rounded-2xl p-3 sm:p-4 shadow-md text-center flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block bg-red-100 text-red-600 font-black text-[10px] px-2 py-0.5 rounded mb-2">FLASH SALE</span>
+                                <div class="h-20 sm:h-24 lg:h-28 flex items-center justify-center mb-2">
+                                    <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwf13605d9/images/fast-forward-tsa-exp/hi-res/155261-1827_hi-res_FRONT34_1.jpg?sw=300" class="max-h-full object-contain" alt="Large Fastforward Elemental Blue" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=FASTFORWARD'">
+                                </div>
+                                <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Large Fastforward</h4>
+                                <span class="text-[10px] font-bold text-slate-500">Elemental Blue</span>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] font-bold text-red-600">
+                                Limited Flash Quantity
+                            </div>
+                        </div>
+
+                        <div class="bg-white text-slate-900 rounded-2xl p-3 sm:p-4 shadow-md text-center flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block bg-red-100 text-red-600 font-black text-[10px] px-2 py-0.5 rounded mb-2">FLASH SALE</span>
+                                <div class="h-20 sm:h-24 lg:h-28 flex items-center justify-center mb-2">
+                                    <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwcabe7bbb/images/curvus-spinner-tsa/hi-res/157428_1562_hi-res_FRONT34_1.jpg?sw=300" class="max-h-full object-contain" alt="Curvus Coffee" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=CURVUS+COFFEE'">
+                                </div>
+                                <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Curvus Coffee</h4>
+                                <span class="text-[10px] font-bold text-slate-500">Signature Edition</span>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] font-bold text-red-600">
+                                Highlight on Stream
+                            </div>
+                        </div>
+
+                        <div class="bg-white text-slate-900 rounded-2xl p-3 sm:p-4 shadow-md text-center flex flex-col justify-between">
+                            <div>
+                                <span class="inline-block bg-red-100 text-red-600 font-black text-[10px] px-2 py-0.5 rounded mb-2">FLASH SALE</span>
+                                <div class="h-20 sm:h-24 lg:h-28 flex items-center justify-center mb-2">
+                                    <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwfeb16b63/images/frontec-spinner-exp-tsa-v2/hi-res/156292_2885_hi-res_FRONT34_1.jpg?sw=300" class="max-h-full object-contain" alt="Frontec Purple Cabin" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=FRONTEC+PURPLE'">
+                                </div>
+                                <h4 class="font-extrabold text-xs sm:text-sm text-slate-900">Frontec Cabin</h4>
+                                <span class="text-[10px] font-bold text-purple-600">Purple Cabin</span>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-slate-100 text-[10px] font-bold text-red-600">
+                                Best Cabin Deal
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SHOPEE PRODUCT ELIGIBILITY MATRIX (full, with Cofund) -->
+            <section class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-card border border-slate-200 space-y-4 sm:space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="text-[10px] sm:text-xs text-at-blue font-extrabold uppercase tracking-widest">PRODUCT COMPATIBILITY LOOKUP</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900">PRODUCT ELIGIBILITY MATRIX</h3>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Click any product row to open detailed voucher rules & quick selling tips.</p>
+                    </div>
+                    <div class="text-[10px] sm:text-xs text-slate-500 flex items-center space-x-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span>✓ Eligible</span>
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 ml-2"></span> <span>— Excluded</span>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-[10px] sm:text-xs uppercase tracking-wider border-b border-slate-200">
+                                <th class="p-2 sm:p-3 rounded-tl-xl">Product</th>
+                                <th class="p-2 sm:p-3 text-center">Image</th>
+                                <th class="p-2 sm:p-3 text-center">Seller VC</th>
+                                <th class="p-2 sm:p-3 text-center">Cofund VC</th>
+                                <th class="p-2 sm:p-3 text-center">Flexi Combo</th>
+                                <th class="p-2 sm:p-3 text-center">Flash Sale</th>
+                                <th class="p-2 sm:p-3 rounded-tr-xl">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-matrix-tbody-shopee" class="divide-y divide-slate-100 font-medium">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 3. TIKTOK PROMO PLAN CONTAINER -->
+        <div id="tiktok-plan-container" class="space-y-8 transition-all duration-300 hidden">
+
+            <div class="flex flex-col md:flex-row md:items-center justify-between border-b-2 border-black pb-3 gap-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-black text-white flex items-center justify-center font-black text-base sm:text-xl shadow-md border border-slate-700">
+                        <i class="fa-brands fa-tiktok text-at-tiktokCyan"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">TIKTOK PROMO PLAN</h2>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Dedicated livestream mechanics & TikTok Shop promotions</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center bg-slate-200 p-1 rounded-2xl self-start md:self-auto overflow-x-auto w-full md:w-auto">
+                    <button id="tiktok-tab-d1" onclick="switchTikTokDate('6-8-9')" class="px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-black text-white shadow-sm whitespace-nowrap">
+                        <i class="fa-regular fa-calendar-days mr-1"></i> 6, 8–9 SEPT
+                    </button>
+                    <button id="tiktok-tab-d2" onclick="switchTikTokDate('7-10-11')" class="px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap">
+                        <i class="fa-regular fa-calendar-check mr-1"></i> 7, 10–11 SEPT
+                    </button>
+                </div>
+            </div>
+
+            <!-- TIKTOK HERO BUNDLE -->
+            <section class="promo-card bg-gradient-to-r from-slate-900 via-black to-slate-800 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-xl relative overflow-hidden" data-category="BUNDLE">
+                <div class="absolute top-0 right-0 bg-at-tiktokPink text-white text-[10px] font-black uppercase tracking-wider px-3 sm:px-4 py-1 rounded-bl-2xl">
+                    TIKTOK SHOP HERO DEAL
+                </div>
+
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-6">
+                    <div class="flex-1 space-y-3">
+                        <div class="inline-flex items-center space-x-2 bg-at-tiktokPink/20 text-at-tiktokPink px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-extrabold border border-at-tiktokPink/30">
+                            <i class="fa-brands fa-tiktok"></i>
+                            <span>CAMPAIGN: BUNDLE UP & SAVE</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-black text-white tracking-tight">BUY 2 OR MORE → <span class="text-at-tiktokCyan">GET ADDITIONAL 20% OFF</span></h3>
+                        <p class="text-[10px] sm:text-xs text-slate-300">
+                            Period: <strong>31 July – Further Notice</strong> | Featured product pair: <strong>SQUASEM + INSTAGON</strong>
+                        </p>
+
+                        <div class="mt-4 p-3 sm:p-4 bg-white/10 rounded-2xl border border-white/10 flex flex-wrap items-center justify-center sm:justify-around gap-3 text-center">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-[10px] sm:text-xs font-bold text-at-yellow">SQUASEM</span>
+                                <span class="text-slate-400">+</span>
+                                <span class="text-[10px] sm:text-xs font-bold text-at-yellow">INSTAGON</span>
+                            </div>
+                            <div class="text-xl font-black text-slate-400">→</div>
+                            <div class="bg-at-tiktokPink px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[10px] sm:text-xs font-black">
+                                BUY 2+ ITEMS = 20% OFF
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="w-full lg:w-48 xl:w-72 bg-white/10 rounded-2xl p-3 sm:p-4 border border-white/10 text-center flex flex-col items-center">
+                        <span class="text-[10px] font-bold text-at-tiktokCyan uppercase mb-2">TIKTOK HERO LUGGAGE</span>
+                        <div class="flex items-center justify-center space-x-2 my-2">
+                            <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0a4102eb/images/squasem-exp-tsa-v2/hi-res/156704-1577_hi-res_FRONT34_1.jpg?sw=300" class="h-16 sm:h-20 lg:h-24 object-contain bg-white/20 rounded-xl p-1" alt="Squasem" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=SQUASEM'">
+                            <img src="https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=300" class="h-16 sm:h-20 lg:h-24 object-contain bg-white/20 rounded-xl p-1" alt="Instagon" onerror="this.src='https://placehold.co/150x150/f1f5f9/002244?text=INSTAGON'">
+                        </div>
+                        <span class="text-[10px] sm:text-xs font-extrabold text-white">SQUASEM + INSTAGON</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TIKTOK DATES 6, 8-9 SEPT -->
+            <div id="tiktok-date-content-6-8-9" class="tiktok-date-view space-y-6 sm:space-y-8">
+                <div class="flex items-center space-x-2 text-slate-800 font-extrabold text-base sm:text-lg">
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-black"></span>
+                    <h3>TIKTOK PROMOTIONS: <span class="text-slate-900">6, 8–9 SEPT</span></h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">👤</div>
+                        <div class="flex-1">
+                            <span class="label text-emerald-600">NEW BUYER DEALS</span>
+                            <div class="amount">RM20 OFF</div>
+                            <p class="detail">Min. Spend: <strong>RM200</strong> (Exclude VB)</p>
+                        </div>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">SELLER VOUCHER 10%</span>
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">10% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-600 mt-1">No Minimum Spend</p>
+                        <div class="mt-2 text-[11px] text-red-600 font-bold">Exclude: BUS & Accessories</div>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">SELLER VOUCHER 15%</span>
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">15% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-600 font-bold mt-1">No Minimum Spend</p>
+                        <div class="mt-2 text-[11px] text-slate-500">
+                            <strong>Eligible:</strong> Regular Items, Rinia, Curio, Ellen, Linex (BUS col), Large Curvus Coffee, Large Fastforward (Steel Blue/Sunset Coral)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="FLEXI COMBO">
+                        <span class="text-[10px] font-extrabold text-sky-600 uppercase">FLEXI COMBO</span>
+                        <div class="text-lg sm:text-2xl font-black text-slate-900 mt-1">BUY 2 GET 20% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Storewide availability.</p>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4" data-category="FREE SHIPPING">
+                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl sm:text-2xl font-black shrink-0">
+                            🚚
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-[10px] font-extrabold text-purple-600 uppercase">SHOPEE NATIONWIDE SHIPPING</span>
+                            <div class="text-base sm:text-lg font-black text-slate-900 mt-0.5">Free Shipping Benefit Thresholds</div>
+                            <div class="mt-2 text-[10px] sm:text-xs space-y-1">
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM500 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM50</strong>
+                                </div>
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM800 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM80</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIKTOK DATES 7, 10-11 SEPT -->
+            <div id="tiktok-date-content-7-10-11" class="tiktok-date-view space-y-6 sm:space-y-8 hidden">
+                <div class="flex items-center space-x-2 text-slate-800 font-extrabold text-base sm:text-lg">
+                    <span class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-black"></span>
+                    <h3>TIKTOK PROMOTIONS: <span class="text-slate-900">7, 10–11 SEPT</span></h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="standard-promo-card promo-card" data-category="NEW CUSTOMER VOUCHER">
+                        <div class="icon-wrap bg-emerald-100 text-emerald-600">👤</div>
+                        <div class="flex-1">
+                            <span class="label text-emerald-600">NEW BUYER</span>
+                            <div class="amount">RM20 OFF</div>
+                            <p class="detail">Min Spend: RM200 (Exclude VB)</p>
+                        </div>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="VOUCHER">
+                        <span class="text-[10px] font-bold text-slate-500 uppercase">SELLER VC 15%</span>
+                        <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">15% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-600 font-bold mt-1">No Minimum Spend</p>
+                        <div class="mt-2 text-[11px] text-slate-500">
+                            Eligible: Rinia, Curio, Ellen, Linex (BUS col), Large Curvus Coffee, Large Fastforward (Steel Blue / Sunset Coral)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm" data-category="FLEXI COMBO">
+                        <span class="text-[10px] font-extrabold text-sky-600 uppercase">FLEXI COMBO</span>
+                        <div class="text-lg sm:text-2xl font-black text-slate-900 mt-1">BUY 2 GET 20% OFF</div>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Storewide.</p>
+                    </div>
+
+                    <div class="promo-card bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start space-x-4" data-category="FREE SHIPPING">
+                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl sm:text-2xl font-black shrink-0">
+                            🚚
+                        </div>
+                        <div class="flex-1">
+                            <span class="text-[10px] font-extrabold text-purple-600 uppercase">SHOPEE NATIONWIDE SHIPPING</span>
+                            <div class="text-base sm:text-lg font-black text-slate-900 mt-0.5">Free Shipping Benefit Thresholds</div>
+                            <div class="mt-2 text-[10px] sm:text-xs space-y-1">
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM500 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM50</strong>
+                                </div>
+                                <div class="flex justify-between bg-purple-50 p-1.5 rounded-lg border border-purple-100">
+                                    <span>RM800 Minimum Spend:</span>
+                                    <strong class="text-purple-700">Capped at RM80</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIKTOK PRODUCT ELIGIBILITY REFERENCE (without Cofund, with note) -->
+            <section class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-card border border-slate-200 space-y-4 sm:space-y-6">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                    <div>
+                        <span class="text-[10px] sm:text-xs text-black font-extrabold uppercase tracking-widest">PRODUCT COMPATIBILITY REFERENCE</span>
+                        <h3 class="text-lg sm:text-2xl font-black text-slate-900">PRODUCT ELIGIBILITY — TIKTOK</h3>
+                        <p class="text-[10px] sm:text-xs text-slate-500">Click any product row to open detailed voucher rules & quick selling tips.</p>
+                    </div>
+                    <div class="text-[10px] sm:text-xs text-slate-500 flex items-center space-x-2">
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span> <span>✓ Eligible</span>
+                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 ml-2"></span> <span>— Excluded</span>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-2 sm:p-3 text-[10px] sm:text-xs text-amber-800 flex items-start gap-2">
+                    <i class="fa-solid fa-info-circle text-amber-500 mt-0.5"></i>
+                    <span><strong>Note:</strong> Cofund VC is not applicable on TikTok. Only Seller VC, Flexi Combo, and Flash Sale mechanics apply.</span>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100 text-slate-700 text-[10px] sm:text-xs uppercase tracking-wider border-b border-slate-200">
+                                <th class="p-2 sm:p-3 rounded-tl-xl">Product</th>
+                                <th class="p-2 sm:p-3 text-center">Image</th>
+                                <th class="p-2 sm:p-3 text-center">Seller VC</th>
+                                <th class="p-2 sm:p-3 text-center">Flexi Combo</th>
+                                <th class="p-2 sm:p-3 text-center">Flash Sale</th>
+                                <th class="p-2 sm:p-3 rounded-tr-xl">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-matrix-tbody-tiktok" class="divide-y divide-slate-100 font-medium">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- 4. IMPORTANT EXCLUSIONS WARNING SECTION -->
+        <section id="exclusions-section" class="bg-red-50/80 border-2 border-red-300 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-md space-y-4">
+            <div class="flex items-center space-x-3 text-red-700">
+                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-red-600 text-white flex items-center justify-center font-black text-base sm:text-xl shrink-0">
+                    ⚠️
+                </div>
+                <div>
+                    <h3 class="text-base sm:text-xl font-black text-red-900 tracking-tight">DON'T MISS THESE EXCLUSIONS</h3>
+                    <p class="text-[10px] sm:text-xs text-red-700">Critical product category exclusions host MUST NOT guarantee on air.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-[10px] sm:text-xs">
+
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-red-200 shadow-sm">
+                    <span class="bg-red-100 text-red-800 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase">EXCLUDED CATEGORY 1</span>
+                    <h4 class="font-black text-slate-900 text-sm sm:text-base mt-1">BUS Lineup</h4>
+                    <ul class="mt-2 text-slate-600 space-y-1 list-disc list-inside">
+                        <li>Excluded from <strong>Seller VC 10%</strong></li>
+                        <li>Excluded from <strong>Cofund VC (15% & 20%)</strong> — Shopee only</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-red-200 shadow-sm">
+                    <span class="bg-red-100 text-red-800 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase">EXCLUDED CATEGORY 2</span>
+                    <h4 class="font-black text-slate-900 text-sm sm:text-base mt-1">VB Lineup</h4>
+                    <ul class="mt-2 text-slate-600 space-y-1 list-disc list-inside">
+                        <li>Excluded from <strong>New Buyer RM20 VC</strong></li>
+                        <li>Excluded from <strong>Cofund VC (15% & 20%)</strong> — Shopee only</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-red-200 shadow-sm">
+                    <span class="bg-red-100 text-red-800 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase">EXCLUDED CATEGORY 3</span>
+                    <h4 class="font-black text-slate-900 text-sm sm:text-base mt-1">Accessories</h4>
+                    <ul class="mt-2 text-slate-600 space-y-1 list-disc list-inside">
+                        <li>Excluded from <strong>Seller VC 10%</strong></li>
+                        <li>Excluded from <strong>Cofund VC</strong> — Shopee only</li>
+                        <li>Excluded from <strong>Platform VC (RM15)</strong> — Shopee only</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 5. LIVESTREAM SCRIPT CHEAT SHEET -->
+        <section class="bg-slate-900 text-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-xl space-y-4 sm:space-y-6">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-slate-800 pb-4 gap-3">
+                <div>
+                    <span class="text-at-yellow font-extrabold text-[10px] sm:text-xs uppercase tracking-widest">LIVESTREAM SCRIPT CHEAT SHEET</span>
+                    <h3 class="text-lg sm:text-2xl font-black text-white">QUICK SELLING GUIDE — WHAT SHOULD I SAY?</h3>
+                    <p class="text-[10px] sm:text-xs text-slate-400 mt-1">Scripts for Shopee & TikTok Live hosts — click "Copy" to send to teleprompter or mod chat.</p>
+                </div>
+                <span class="text-[10px] sm:text-xs bg-slate-800 text-slate-300 px-3 py-1 rounded-full border border-slate-700 hidden sm:inline-block">
+                    <i class="fa-regular fa-copy mr-1"></i> Copy & use
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-3 border-b border-slate-700 pb-2">
+                        <i class="fa-solid fa-bag-shopping text-at-shopee"></i>
+                        <span class="text-xs sm:text-sm font-extrabold text-at-shopee uppercase tracking-wider">Shopee Scripts</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3" id="shopee-script-grid">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center gap-2 mb-3 border-b border-slate-700 pb-2">
+                        <i class="fa-brands fa-tiktok text-at-tiktokCyan"></i>
+                        <span class="text-xs sm:text-sm font-extrabold text-at-tiktokCyan uppercase tracking-wider">TikTok Scripts</span>
+                    </div>
+                    <div class="grid grid-cols-1 gap-3" id="tiktok-script-grid">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PRODUCT DETAIL MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4 transition-all">
+        <div class="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full p-4 sm:p-6 shadow-2xl space-y-5 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeProductModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center text-xs sm:text-sm font-bold">
+                ✕
+            </button>
+
+            <div class="flex items-center space-x-4">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-50 border border-slate-200 p-2 flex items-center justify-center shrink-0">
+                    <img id="modal-img" src="" class="max-h-full object-contain" alt="Product Image">
+                </div>
+                <div>
+                    <span id="modal-category" class="text-[10px] bg-at-blue/10 text-at-blue font-extrabold px-2 py-0.5 rounded uppercase">Luggage</span>
+                    <h3 id="modal-title" class="text-lg sm:text-2xl font-black text-slate-900 mt-0.5">Product Title</h3>
+                    <div id="modal-tags" class="flex flex-wrap gap-1 mt-1"></div>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <span class="font-bold text-slate-700 block text-[11px] uppercase">Voucher Eligibility:</span>
+                    <p id="modal-vouchers" class="text-slate-600 font-semibold"></p>
+                </div>
+
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                    <span class="font-bold text-slate-700 block text-[11px] uppercase">Active Campaign Mechanics:</span>
+                    <p id="modal-campaigns" class="text-slate-600 font-semibold"></p>
+                </div>
+
+                <div class="p-3 bg-red-50 rounded-xl border border-red-100 space-y-1">
+                    <span class="font-bold text-red-700 block text-[11px] uppercase">Exclusions & Limits:</span>
+                    <p id="modal-exclusions" class="text-red-800 font-semibold"></p>
+                </div>
+
+                <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 space-y-1">
+                    <span class="font-bold text-amber-800 block text-[11px] uppercase">Host Quick Pitch Note:</span>
+                    <p id="modal-pitch" class="text-slate-800 font-semibold italic"></p>
+                </div>
+            </div>
+
+            <div class="pt-2 text-right">
+                <button onclick="closeProductModal()" class="w-full bg-at-navy text-white font-bold py-2.5 rounded-xl hover:bg-slate-800 transition-all text-xs">
+                    Close Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Back to Top Button -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-40 bg-at-navy text-white w-10 h-10 sm:w-11 sm:h-11 rounded-full shadow-lg border border-slate-700 flex items-center justify-center hover:bg-at-blue transition-all">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- FOOTER -->
+    <footer class="mt-16 bg-at-navy text-white py-8 sm:py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+            <div class="flex items-center justify-center space-x-2">
+                <div class="bg-at-yellow text-at-navy px-2 py-0.5 rounded font-black text-[10px] sm:text-xs">AMERICAN TOURISTER</div>
+                <span class="text-[10px] sm:text-xs font-bold text-slate-400">Malaysia Operations</span>
+            </div>
+            <h4 class="text-xs sm:text-sm font-extrabold tracking-wider">INTERNAL PROMO COMMAND CENTRE</h4>
+            <p class="text-[10px] sm:text-xs text-slate-400">Prepared for LIVE Operations Team, Livestream Hosts & Moderators.</p>
+
+            <div class="pt-4 border-t border-slate-800/80 max-w-2xl mx-auto text-[10px] sm:text-[11px] text-slate-400 leading-relaxed">
+                <p>⚠️ <strong>Disclaimer:</strong> Always verify final voucher availability and campaign mechanics directly on the respective seller back-end platform before communicating deals to customers during live broadcasts.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- APPLICATION LOGIC -->
+    <script>
+        const campaignData = {
+            products: [{
+                id: "squasem",
+                name: "SQUASEM",
+                fullName: "Squasem Spinner TSA V2",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0a4102eb/images/squasem-exp-tsa-v2/hi-res/156704-1577_hi-res_FRONT34_1.jpg?sw=400",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Eligible for Bundle Up & Save 20% OFF hero mechanic with Instagon.",
+                vouchers: "10% VC (15% & 20% on selected bundles)",
+                campaigns: "Bundle Up & Save (Buy 2+ Get 20% OFF)",
+                exclusions: "None specific",
+                pitch: "Highlight the modern geometric design and double wheels!"
+            }, {
+                id: "instagon",
+                name: "INSTAGON",
+                fullName: "Instagon Spinner TSA V2",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=400",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Hero pair item with Squasem. Expandable capacity.",
+                vouchers: "Eligible for 10% & Cofund VC",
+                campaigns: "Bundle Up & Save Hero Pair",
+                exclusions: "Standard exclusions apply",
+                pitch: "Pair with Squasem for instant 20% bundle savings!"
+            }, {
+                id: "rinia",
+                name: "RINIA",
+                fullName: "Rinia 3PC Set TSA",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw48c05c1f/images/rinia-3pc-set-tsa/hi-res/159171-1832_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Eligible for 15% Seller VC (No Min Spend).",
+                vouchers: "15% Seller VC, Cofund VC",
+                campaigns: "Flexi Combo Buy 2 Get 20%",
+                exclusions: "None",
+                pitch: "Great family bundle value with 3PC set!"
+            }, {
+                id: "curio",
+                name: "CURIO",
+                fullName: "Curio Spinner TSA BO V2",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0e9abfd1/images/curio-book-opening-v2/hi-res/156737_2012_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Best-selling icon. Eligible for 15% Seller VC.",
+                vouchers: "15% Seller VC, Cofund 15%/20%",
+                campaigns: "Storewide Flexi Combo",
+                exclusions: "Standard exclusions",
+                pitch: "The legendary circular design loved by travelers worldwide!"
+            }, {
+                id: "ellen",
+                name: "ELLEN",
+                fullName: "Ellen Spinner TSA V2",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw78e9d9e6/images/ellen-spinner-tsa-v2/hi-res/156755_9155_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Eligible for 20% Seller VC (Top Discount Tier).",
+                vouchers: "20% Seller VC (High Tier!)",
+                campaigns: "Flexi Combo",
+                exclusions: "None",
+                pitch: "Super lightweight & unlock max 20% seller voucher!"
+            }, {
+                id: "linex",
+                name: "LINEX",
+                fullName: "Linex Spinner TSA V2",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw3ea465a3/images/linex-tsa-r-v2/hi-res/157411_1938_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "15% VC applies specifically to BUS colour variant.",
+                vouchers: "15% Seller VC (BUS colour)",
+                campaigns: "Flexi Combo",
+                exclusions: "BUS colour voucher restriction",
+                pitch: "Sleek lines and high scratch resistance."
+            }, {
+                id: "fastforward",
+                name: "FASTFORWARD",
+                fullName: "Fastforward Spinner TSA EXP",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwf13605d9/images/fast-forward-tsa-exp/hi-res/155261-1827_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: true,
+                notes: "Large Steel Blue / Sunset Coral = 15% VC. Elemental Blue = Flash Sale.",
+                vouchers: "15% Seller VC (Steel Blue & Sunset Coral)",
+                campaigns: "Flash Sale (Elemental Blue)",
+                exclusions: "Colour specific deals",
+                pitch: "Flash Sale special! Check the Elemental Blue deal!"
+            }, {
+                id: "curvus_coffee",
+                name: "CURVUS COFFEE",
+                fullName: "Curvus Spinner TSA EXP (Coffee)",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwcabe7bbb/images/curvus-spinner-tsa/hi-res/157428_1562_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: true,
+                notes: "Large Curvus Coffee = 15% VC + Flash Sale feature on 7, 10-11 Sept.",
+                vouchers: "15% Seller VC (Large Coffee)",
+                campaigns: "Flash Sale Feature",
+                exclusions: "None",
+                pitch: "Unique premium coffee shade - featured Flash item!"
+            }, {
+                id: "frontec",
+                name: "FRONTEC",
+                fullName: "Frontec Spinner TSA OS",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwfeb16b63/images/frontec-spinner-exp-tsa-v2/hi-res/156292_2885_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: true,
+                notes: "Purple Cabin = Flash Sale highlight.",
+                vouchers: "Cofund 15%/20%",
+                campaigns: "Flash Sale (Purple Cabin)",
+                exclusions: "Standard",
+                pitch: "Front-opening laptop compartment ideal for business travelers!"
+            }, {
+                id: "dashpop",
+                name: "DASHPOP",
+                fullName: "Dashpop Spinner EXP TSA",
+                img: "https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwa821e737/images/dashpop-spinner-exp-tsa/hi-res/151861-1371_hi-res_FRONT34_1.jpg?sw=500&sh=750",
+                sellerVc: true,
+                cofundVc: true,
+                flexiCombo: true,
+                flashSale: false,
+                notes: "Eligible for top 20% Seller VC.",
+                vouchers: "20% Seller VC",
+                campaigns: "Flexi Combo",
+                exclusions: "None",
+                pitch: "Pop of color and extra expansion zipper!"
+            }],
+
+            shopeeScripts: [{
+                title: "🔥 BEST BUNDLE DEAL",
+                tag: "Hero Pitch",
+                script: "Buy 2 or more luggage items right now and enjoy an additional 20% OFF auto-discounted at checkout!"
+            }, {
+                title: "🎟️ NEW BUYER SPECIAL",
+                tag: "Conversion",
+                script: "New to our Shopee store? Claim your RM20 OFF voucher with minimum spend RM200!"
+            }, {
+                title: "💳 STORE VOUCHER TIER",
+                tag: "Voucher",
+                script: "Don't forget to stack our 15% and 20% Seller Vouchers before checking out!"
+            }, {
+                title: "🚚 FREE SHIPPING",
+                tag: "Shipping",
+                script: "Spend RM500 for RM50 off shipping, or RM800 for up to RM80 FREE shipping nationwide!"
+            }, {
+                title: "⚡ FLASH SALE ALERT",
+                tag: "Urgency",
+                script: "Limited Flash Sale items live now: Large Fastforward, Curvus Coffee & Frontec Purple Cabin!"
+            }],
+
+            tiktokScripts: [{
+                title: "🔥 TIKTOK BUNDLE UP",
+                tag: "TikTok Hero",
+                script: "Checkout 2 items together in your TikTok cart to instantly unlock extra 20% OFF!"
+            }, {
+                title: "🎟️ NEW CUSTOMER",
+                tag: "TikTok VC",
+                script: "First time buying on our TikTok LIVE? Tap the yellow bag to claim RM20 OFF on RM200!"
+            }, {
+                title: "🚚 TIKTOK SHIPPING",
+                tag: "Shipping",
+                script: "Grab TikTok Shop shipping vouchers inside the yellow bag before paying — check cap & threshold!"
+            }]
+        };
+
+        let currentPlatform = 'shopee';
+        let currentShopeeDate = '6-8-9';
+        let currentTikTokDate = '6-8-9';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateTimestamp();
+            renderScripts();
+            renderProductMatrices();
+        });
+
+        function updateTimestamp() {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('last-updated-time').innerText = `${dateStr}, ${timeStr}`;
+        }
+
+        function switchPlatform(platform) {
+            currentPlatform = platform;
+            const shopeeBtn = document.getElementById('btn-platform-shopee');
+            const tiktokBtn = document.getElementById('btn-platform-tiktok');
+            const shopeeContainer = document.getElementById('shopee-plan-container');
+            const tiktokContainer = document.getElementById('tiktok-plan-container');
+            const indicator = document.getElementById('platform-indicator-badge');
+
+            if (platform === 'shopee') {
+                shopeeBtn.className =
+                    "flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-at-shopee text-white shadow-md";
+                tiktokBtn.className =
+                    "flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
+                shopeeContainer.classList.remove('hidden');
+                tiktokContainer.classList.add('hidden');
+                indicator.innerText = "Viewing: SHOPEE PLAN";
+                indicator.className = "px-2 sm:px-3 py-1 bg-at-shopee text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm";
+            } else {
+                tiktokBtn.className =
+                    "flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 bg-black text-white shadow-md";
+                shopeeBtn.className =
+                    "flex-1 md:flex-none flex items-center justify-center space-x-2 px-4 sm:px-6 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 text-slate-600 hover:text-slate-900";
+                shopeeContainer.classList.add('hidden');
+                tiktokContainer.classList.remove('hidden');
+                indicator.innerText = "Viewing: TIKTOK PLAN";
+                indicator.className = "px-2 sm:px-3 py-1 bg-black text-white text-[10px] sm:text-xs font-bold rounded-full shadow-sm";
+            }
+        }
+
+        function switchShopeeDate(dateKey) {
+            currentShopeeDate = dateKey;
+            const btn1 = document.getElementById('shopee-tab-d1');
+            const btn2 = document.getElementById('shopee-tab-d2');
+            const content1 = document.getElementById('shopee-date-content-6-8-9');
+            const content2 = document.getElementById('shopee-date-content-7-10-11');
+
+            if (dateKey === '6-8-9') {
+                btn1.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-white text-at-shopee shadow-sm whitespace-nowrap";
+                btn2.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap";
+                content1.classList.remove('hidden');
+                content2.classList.add('hidden');
+            } else {
+                btn2.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-white text-at-shopee shadow-sm whitespace-nowrap";
+                btn1.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap";
+                content2.classList.remove('hidden');
+                content1.classList.add('hidden');
+            }
+        }
+
+        function switchTikTokDate(dateKey) {
+            currentTikTokDate = dateKey;
+            const btn1 = document.getElementById('tiktok-tab-d1');
+            const btn2 = document.getElementById('tiktok-tab-d2');
+            const content1 = document.getElementById('tiktok-date-content-6-8-9');
+            const content2 = document.getElementById('tiktok-date-content-7-10-11');
+
+            if (dateKey === '6-8-9') {
+                btn1.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-black text-white shadow-sm whitespace-nowrap";
+                btn2.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap";
+                content1.classList.remove('hidden');
+                content2.classList.add('hidden');
+            } else {
+                btn2.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all bg-black text-white shadow-sm whitespace-nowrap";
+                btn1.className =
+                    "px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-bold rounded-xl transition-all text-slate-600 hover:text-slate-900 whitespace-nowrap";
+                content2.classList.remove('hidden');
+                content1.classList.add('hidden');
+            }
+        }
+
+        function renderScripts() {
+            const shopeeGrid = document.getElementById('shopee-script-grid');
+            const tiktokGrid = document.getElementById('tiktok-script-grid');
+
+            shopeeGrid.innerHTML = campaignData.shopeeScripts.map(item => `
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-col justify-between hover:border-at-yellow/50 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] sm:text-xs mb-2">
+                            <span class="font-bold text-at-yellow">${item.title}</span>
+                            <span class="bg-slate-700 text-slate-300 text-[10px] px-2 py-0.5 rounded">${item.tag}</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-200 leading-relaxed italic">"${item.script}"</p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-slate-700/60 text-right">
+                        <button onclick="copyToClipboard('${item.script.replace(/'/g, "\\'")}', this)" class="bg-slate-700 hover:bg-at-blue text-white text-[10px] sm:text-[11px] font-bold px-2 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 ml-auto">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Copy Script</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            tiktokGrid.innerHTML = campaignData.tiktokScripts.map(item => `
+                <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl p-3 sm:p-4 flex flex-col justify-between hover:border-at-tiktokCyan/50 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] sm:text-xs mb-2">
+                            <span class="font-bold text-at-tiktokCyan">${item.title}</span>
+                            <span class="bg-slate-700 text-slate-300 text-[10px] px-2 py-0.5 rounded">${item.tag}</span>
+                        </div>
+                        <p class="text-[10px] sm:text-xs text-slate-200 leading-relaxed italic">"${item.script}"</p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-slate-700/60 text-right">
+                        <button onclick="copyToClipboard('${item.script.replace(/'/g, "\\'")}', this)" class="bg-slate-700 hover:bg-at-tiktokPink text-white text-[10px] sm:text-[11px] font-bold px-2 sm:px-3 py-1.5 rounded-lg transition-all flex items-center space-x-1.5 ml-auto">
+                            <i class="fa-regular fa-copy"></i>
+                            <span>Copy Script</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function copyToClipboard(text, btnElement) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            const originalHTML = btnElement.innerHTML;
+            btnElement.innerHTML = '<i class="fa-solid fa-check"></i> <span>Copied!</span>';
+            btnElement.classList.add('bg-emerald-600');
+
+            setTimeout(() => {
+                btnElement.innerHTML = originalHTML;
+                btnElement.classList.remove('bg-emerald-600');
+            }, 1800);
+        }
+
+        function renderProductMatrices() {
+            // Shopee matrix (full, with Cofund)
+            const shopeeTbody = document.getElementById('product-matrix-tbody-shopee');
+            shopeeTbody.innerHTML = campaignData.products.map(p => `
+                <tr onclick="openProductModal('${p.id}')" class="hover:bg-blue-50/50 cursor-pointer transition-colors border-b border-slate-100">
+                    <td class="p-2 sm:p-3">
+                        <div class="font-extrabold text-slate-900">${p.name}</div>
+                        <div class="text-[10px] text-slate-500">${p.fullName}</div>
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-50 border border-slate-200 p-1 mx-auto flex items-center justify-center">
+                            <img src="${p.img}" class="max-h-full object-contain" alt="${p.name}" onerror="this.src='https://placehold.co/100x100/f1f5f9/002244?text=${p.name}'">
+                        </div>
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.sellerVc ? '<span class="text-emerald-600 text-base sm:text-lg">✓</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.cofundVc ? '<span class="text-emerald-600 text-base sm:text-lg">✓</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.flexiCombo ? '<span class="text-emerald-600 text-base sm:text-lg">✓</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.flashSale ? '<span class="bg-red-100 text-red-600 font-extrabold text-[10px] px-2 py-0.5 rounded">FLASH</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-[10px] sm:text-xs text-slate-600 max-w-xs">
+                        ${p.notes}
+                    </td>
+                </tr>
+            `).join('');
+
+            // TikTok matrix (without Cofund column)
+            const tiktokTbody = document.getElementById('product-matrix-tbody-tiktok');
+            tiktokTbody.innerHTML = campaignData.products.map(p => `
+                <tr onclick="openProductModal('${p.id}')" class="hover:bg-blue-50/50 cursor-pointer transition-colors border-b border-slate-100">
+                    <td class="p-2 sm:p-3">
+                        <div class="font-extrabold text-slate-900">${p.name}</div>
+                        <div class="text-[10px] text-slate-500">${p.fullName}</div>
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-slate-50 border border-slate-200 p-1 mx-auto flex items-center justify-center">
+                            <img src="${p.img}" class="max-h-full object-contain" alt="${p.name}" onerror="this.src='https://placehold.co/100x100/f1f5f9/002244?text=${p.name}'">
+                        </div>
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.sellerVc ? '<span class="text-emerald-600 text-base sm:text-lg">✓</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.flexiCombo ? '<span class="text-emerald-600 text-base sm:text-lg">✓</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-center">
+                        ${p.flashSale ? '<span class="bg-red-100 text-red-600 font-extrabold text-[10px] px-2 py-0.5 rounded">FLASH</span>' : '<span class="text-slate-300 text-base sm:text-lg">—</span>'}
+                    </td>
+                    <td class="p-2 sm:p-3 text-[10px] sm:text-xs text-slate-600 max-w-xs">
+                        ${p.notes}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function openProductModal(productId) {
+            const product = campaignData.products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('modal-title').innerText = product.fullName;
+            document.getElementById('modal-img').src = product.img;
+            document.getElementById('modal-img').onerror = function() {
+                this.src = `https://placehold.co/200x200/f1f5f9/002244?text=${product.name}`;
+            };
+            document.getElementById('modal-vouchers').innerText = product.vouchers;
+            document.getElementById('modal-campaigns').innerText = product.campaigns;
+            document.getElementById('modal-exclusions').innerText = product.exclusions;
+            document.getElementById('modal-pitch').innerText = `"${product.pitch}"`;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = `
+                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded">Seller VC</span>
+                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded">Cofund VC</span>
+                ${product.flashSale ? '<span class="bg-red-100 text-red-800 text-[10px] font-bold px-2 py-0.5 rounded">Flash Sale</span>' : ''}
+            `;
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
