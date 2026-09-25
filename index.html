@@ -96,8 +96,8 @@ tailwind.config = {
 <!-- ======================= MAIN ======================= -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-5 space-y-8">
   <section id="glance" class="grid grid-cols-2 lg:grid-cols-4 gap-3"></section>
-  <section id="persistent-offers" class="space-y-6"></section>
-  <section id="platform-content" class="space-y-6"></section>
+  <section id="top-offers" class="space-y-6"></section>
+  <section id="vouchers"></section>
   <section id="exclusions"></section>
   <section id="scripts"></section>
 </main>
@@ -132,14 +132,19 @@ const DATA = {
       payday:      { icon: 'fa-bolt',        colour: 'red',    label: 'Payday Sale' },
       shipping:    { icon: 'fa-truck-fast',  colour: 'purple', label: 'Free Shipping' }
     },
-    persistent: {
+    topOffers: {
       specialPriceTag:    'Special Price',
       specialBadge:       '⭐',
       heroBadge:          '🔥',
       eligiblePairLabel:  'Eligible Pair',
       periodLabel:        'Period'
     },
-    platform: {
+    exclusive: {
+      giftIcon:      'fa-gift',
+      warnIcon:      'fa-triangle-exclamation'
+    },
+    vouchers: {
+      heading:           'Vouchers & Benefits',
       storeVcHeading:    'Store Vouchers',
       cofundHeading:     'Cofund Session',
       excludeLabel:      'Exclude',
@@ -187,7 +192,7 @@ const DATA = {
       imgB: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=300'
     },
     payday: {
-      status: 'Coming soon',     // edit to 'Live now' on/after 24 Sep 8PM
+      status: 'Coming soon',
       period: '24 Sep (8PM) – 27 Sep'
     },
     freeShipping: {
@@ -200,8 +205,18 @@ const DATA = {
     shopee: {
       name: 'Shopee',
       accent: 'at-shopee',
-      saleName: 'Shopee Payday Sale',
-      salePeriod: '24 Sep (8PM) – 27 Sep',
+      exclusiveOffers: [
+        {
+          tag:      'Shopee Exclusive',
+          badge:    '🎁',
+          title:    'Buy Curio — Free Cabin',
+          headline: 'Buy Large / Medium Curio → Free Cabin',
+          period:   '25 Sep – 11 Oct',
+          excludes: 'Excludes Aquatiawe & Raspberry colours',
+          img:      'https://cf.shopee.com.my/file/my-11134207-820lh-mtiwnayqvmyqbb',
+          imgAlt:   'Curio Free Cabin Offer'
+        }
+      ],
       newCustomer: [
         { icon: '🎟️', label: 'New Follower (BAU)', amount: 'RM10 OFF', detail: 'No min spend · Storewide', tag: 'Storewide' },
         { icon: '👤', label: 'New Buyer',           amount: 'RM20 OFF', detail: 'Min spend RM200',           tag: 'Exclude VB' }
@@ -225,8 +240,7 @@ const DATA = {
     tiktok: {
       name: 'TikTok',
       accent: 'at-tiktokPink',
-      saleName: 'TikTok Payday Sale',
-      salePeriod: '24 Sep (8PM) – 27 Sep',
+      exclusiveOffers: [],
       newCustomer: [
         { icon: '👤', label: 'New Buyer', amount: 'RM20 OFF', detail: 'Min spend RM200', tag: 'Exclude VB' }
       ],
@@ -248,6 +262,7 @@ const DATA = {
 
   scripts: {
     shopee: [
+      { title: '🎁 Curio Free Cabin',      tag: 'Shopee Deal',  text: 'Buy any Large or Medium Curio and get a FREE cabin — 25 September to 11 October only! Excludes Aquatiawe & Raspberry colours.' },
       { title: '⭐ Ellen 3PC Set @ RM799', tag: 'Sept Special', text: 'September special — grab the Ellen 3PC Set at only RM799, from 12 to 30 September only!' },
       { title: '🔥 Bundle Up & Save',      tag: 'Hero Pitch',   text: 'Buy 2 or more luggage items right now and enjoy an additional 20% OFF auto-discounted at checkout!' },
       { title: '🎟️ New Buyer RM20 OFF',    tag: 'Conversion',   text: 'New to our Shopee store? Claim your RM20 OFF voucher with minimum spend RM200 — just tap the voucher!' },
@@ -266,7 +281,7 @@ const DATA = {
 };
 
 /* ============================================================
-   RENDER HELPERS
+   HELPERS
    ============================================================ */
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -301,12 +316,13 @@ function renderGlance() {
   `).join('');
 }
 
-/* ---- Persistent offers (Ellen + Bundle) ----------------- */
-function renderPersistent() {
+/* ---- TOP OFFERS: Curio first, then Ellen, then Bundle ---- */
+function renderTopOffers(platformKey) {
   const { ellen, bundle } = DATA.shared;
-  const ui = DATA.ui.persistent;
+  const ui = DATA.ui.topOffers;
+  const p  = DATA.platforms[platformKey];
 
-  $('persistent-offers').innerHTML = `
+  const ellenCard = `
     <article class="relative overflow-hidden bg-gradient-to-r from-pink-50 via-white to-rose-50 rounded-3xl border-2 border-pink-300/60 p-5 sm:p-6 shadow-card">
       <span class="absolute top-0 right-0 bg-pink-500 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
         ${ui.specialBadge} ${esc(ellen.tag)}
@@ -332,7 +348,9 @@ function renderPersistent() {
         </div>
       </div>
     </article>
+  `;
 
+  const bundleCard = `
     <article class="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl border-2 border-at-shopee/30 p-5 sm:p-6 shadow-card">
       <span class="absolute top-0 right-0 bg-at-shopee text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
         ${ui.heroBadge} ${esc(bundle.tag)}
@@ -363,13 +381,49 @@ function renderPersistent() {
       </div>
     </article>
   `;
+
+  const exclusiveCards = (p.exclusiveOffers || []).map(o => {
+    const ui2 = DATA.ui.exclusive;
+    return `
+      <article class="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl border-2 border-at-shopee/40 p-5 sm:p-6 shadow-card">
+        <span class="absolute top-0 right-0 bg-at-shopee text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
+          ${o.badge || ui2.giftIcon} ${esc(o.tag)}
+        </span>
+        <div class="flex flex-col lg:flex-row items-center gap-6">
+          <div class="flex-1 space-y-3 w-full">
+            <span class="inline-flex items-center gap-2 bg-at-shopee/10 text-at-shopee border border-at-shopee/20 px-3 py-1 rounded-full text-xs font-extrabold">
+              <i class="fa-solid ${ui2.giftIcon}"></i> ${esc(o.title)}
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              ${esc(o.headline)}
+            </h2>
+            <p class="text-xs text-slate-600 font-medium">
+              <i class="fa-regular fa-calendar text-at-shopee mr-1"></i>
+              ${esc(ui.periodLabel)}: <strong>${esc(o.period)}</strong>
+            </p>
+            ${o.excludes ? `
+              <p class="text-[11px] text-red-600 font-semibold">
+                <i class="fa-solid ${ui2.warnIcon} mr-1"></i>${esc(o.excludes)}
+              </p>` : ''}
+          </div>
+          <div class="w-full lg:w-56 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm flex flex-col items-center">
+            <img src="${o.img}" alt="${esc(o.imgAlt)}" class="h-28 sm:h-32 object-contain"
+                 onerror="this.src='https://placehold.co/150x150/fff7ed/ea580c?text=CURIO'">
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  // ⬇️ Curio (exclusive cards) first, then Ellen, then Bundle
+  $('top-offers').innerHTML = exclusiveCards + ellenCard + bundleCard;
 }
 
-/* ---- Platform content (Payday mechanics) ----------------- */
-function platformSectionHTML(p) {
-  const ui = DATA.ui.platform;
+/* ---- Vouchers & Benefits section ------------------------ */
+function renderVouchers(p) {
+  const ui = DATA.ui.vouchers;
 
-  const newCustomer = `
+  const newCustomer = p.newCustomer.length ? `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       ${p.newCustomer.map(v => `
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-card flex gap-4">
@@ -385,7 +439,7 @@ function platformSectionHTML(p) {
         </div>
       `).join('')}
     </div>
-  `;
+  ` : '';
 
   const storeVc = `
     <div class="space-y-3">
@@ -451,18 +505,16 @@ function platformSectionHTML(p) {
     </div>
   `;
 
-  return `
-    <header class="flex items-center justify-between border-b-2 border-${p.accent} pb-3">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-${p.accent} text-white flex items-center justify-center text-xl shadow-md">
-          ${p.name === 'Shopee' ? '<i class="fa-solid fa-bag-shopping"></i>' : '<i class="fa-brands fa-tiktok"></i>'}
-        </div>
-        <div>
-          <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">${esc(p.saleName)}</h2>
-          <p class="text-[11px] text-slate-500">${esc(p.salePeriod)}</p>
-        </div>
+  $('vouchers').innerHTML = `
+    <div class="flex items-center gap-3 border-b-2 border-${p.accent} pb-3">
+      <div class="w-10 h-10 rounded-2xl bg-${p.accent} text-white flex items-center justify-center text-xl shadow-md">
+        <i class="fa-solid fa-ticket"></i>
       </div>
-    </header>
+      <div>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">${esc(ui.heading)}</h2>
+        <p class="text-[11px] text-slate-500">${esc(p.name)} — active vouchers & shipping benefits</p>
+      </div>
+    </div>
 
     <div class="space-y-6 pt-4">
       ${newCustomer}
@@ -563,12 +615,13 @@ function switchPlatform(key) {
   $('tab-tiktok').className = key === 'tiktok' ? `${TAB_ACTIVE} bg-black`       : TAB_INACTIVE;
 
   const pill = $('platform-pill');
-  pill.textContent = `Viewing: ${p.name} — ${p.saleName}`;
+  pill.textContent = `Viewing: ${p.name}`;
   pill.className = `px-3 py-1 text-[10px] sm:text-xs font-bold rounded-full shadow-sm ${
     key === 'shopee' ? 'bg-at-shopee text-white' : 'bg-black text-white'
   }`;
 
-  $('platform-content').innerHTML = platformSectionHTML(p);
+  renderTopOffers(key);
+  renderVouchers(p);
   renderScripts(key);
 }
 
@@ -601,7 +654,6 @@ document.addEventListener('click', (e) => {
 document.addEventListener('DOMContentLoaded', () => {
   setUpdatedTime();
   renderGlance();
-  renderPersistent();
   renderExclusions();
   renderFooter();
   switchPlatform('shopee');
