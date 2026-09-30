@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>American Tourister — Promo Deals Centre</title>
+<title>American Tourister — 10.10 Campaign Deals Centre</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,12 +57,12 @@ tailwind.config = {
       </div>
       <div>
         <h1 class="text-sm sm:text-lg font-extrabold tracking-tight flex items-center gap-2">
-          PROMOTION DEALS CENTRE
+          10.10 PROMOTION DEALS CENTRE
           <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-500/20 text-red-300 border border-red-500/30">
             <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-1 live-dot"></span> LIVE
           </span>
         </h1>
-        <p class="text-[10px] sm:text-xs text-slate-300 hidden sm:block">Selling guide for hosts, mods &amp; ops</p>
+        <p class="text-[10px] sm:text-xs text-slate-300 hidden sm:block">7 – 12 Oct · Selling guide for hosts, mods &amp; ops</p>
       </div>
     </div>
 
@@ -126,41 +126,41 @@ tailwind.config = {
 const DATA = {
   ui: {
     glance: {
-      septSpecial: { icon: 'fa-tags',        colour: 'pink',   label: 'Sept Special' },
-      hero:        { icon: 'fa-layer-group', colour: 'amber',  label: 'Hero Mechanic',
-                     value: 'Buy 2 or more', sub: 'Extra 20% OFF' },
-      payday:      { icon: 'fa-bolt',        colour: 'red',    label: 'Payday Sale' },
-      shipping:    { icon: 'fa-truck-fast',  colour: 'purple', label: 'Free Shipping' }
+      hero:     { icon: 'fa-gift',         colour: 'pink',   label: 'Curio Gift Deal', value: 'Buy L/M Curio', sub: 'FREE Cabin' },
+      bundle:   { icon: 'fa-layer-group',  colour: 'amber',  label: 'Bundle Deal',     value: 'Buy 2 Get 10% OFF', sub: 'Exclude BUS & Curio Bundle' },
+      storeVc:  { icon: 'fa-ticket',       colour: 'blue',   label: 'Store Voucher',   value: 'RM15 OFF NMS', sub: '+ 15% OFF Selected' },
+      shipping: { icon: 'fa-truck-fast',   colour: 'purple', label: 'Free Shipping',   value: 'Cap RM50 – RM80', sub: 'Min RM500 / RM800' }
     },
     topOffers: {
-      specialPriceTag:    'Special Price',
+      specialPriceTag:    'Campaign Special',
       specialBadge:       '⭐',
       heroBadge:          '🔥',
-      eligiblePairLabel:  'Eligible Pair',
+      eligiblePairLabel:  'Featured Luggage',
       periodLabel:        'Period'
     },
     exclusive: {
-      giftIcon:      'fa-gift',
-      warnIcon:      'fa-triangle-exclamation'
+      giftIcon: 'fa-gift',
+      warnIcon: 'fa-triangle-exclamation'
     },
     vouchers: {
-      heading:           'Vouchers & Benefits',
+      heading:           'Vouchers & Campaign Mechanics',
       storeVcHeading:    'Store Vouchers',
-      cofundHeading:     'Cofund Session',
+      cofundHeading:     'Cofund Vouchers',
+      livestreamHeading: 'Livestreaming Special Deals',
       excludeLabel:      'Exclude',
       spendSuffix:       'SPEND',
       saveSuffix:        'SAVE UP TO',
-      shippingCapLabel:  'Shipping subsidy cap'
+      shippingCapLabel:  'Free Shipping subsidy'
     },
     exclusions: {
       title:    "Don't Miss These Exclusions",
-      subtitle: 'Critical exclusions hosts MUST NOT guarantee on air.',
+      subtitle: 'Critical exclusions hosts & moderators MUST NOT guarantee on air.',
       badge:    'Excluded'
     },
     scripts: {
       sectionTag:    'Livestream Script Cheat Sheet',
       titlePrefix:   'Quick Selling Guide',
-      subtitle:      'Tap "Copy" to send to teleprompter or mod chat.',
+      subtitle:      'Tap "Copy" to send to teleprompter or host notes.',
       copyBadge:     'Copy & use',
       copyButton:    'Copy Script',
       copiedButton:  'Copied!'
@@ -172,32 +172,21 @@ const DATA = {
   },
 
   shared: {
-    ellen: {
-      tag:    'September Special',
-      title:  'Ellen 3PC Set',
-      price:  'RM799',
-      period: '12 Sep – 30 Sep',
-      img:    'https://cf.shopee.com.my/file/my-11134207-820lg-msxsk8ggbjlxa2',
-      alt:    'Ellen 3PC Set'
+    curioFreeCabin: {
+      tag:      'Curio Special Deal',
+      title:    'Buy Large / Medium Curio → Free Cabin',
+      period:   '25 Sep – 11 Oct',
+      excludes: 'Excludes Aquatiawe & Raspberry colours',
+      img:      'https://cf.shopee.com.my/file/my-11134207-820lh-mtiwnayqvmyqbb',
+      alt:      'Curio Free Cabin Offer'
     },
     bundle: {
-      tag:         'Hero Mechanic',
-      title:       'Bundle Up & Save',
-      headline:    'Buy 2 or more → extra 20% OFF',
-      glanceValue: 'Buy 2 or more',
-      glanceSub:   'Extra 20% OFF',
-      period:      '31 Jul – Further Notice',
-      pair:        ['Squasem', 'Instagon'],
-      imgA: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0a4102eb/images/squasem-exp-tsa-v2/hi-res/156704-1577_hi-res_FRONT34_1.jpg?sw=300',
-      imgB: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwb1a39e2d/images/instagon-exp-tsa-v2/hi-res/156286-8900_hi-res_FRONT34_1.jpg?sw=300'
-    },
-    payday: {
-      status: 'Coming soon',
-      period: '24 Sep (8PM) – 27 Sep'
-    },
-    freeShipping: {
-      value: 'Capped RM20',
-      sub:   'Payday only'
+      tag:         'Bundle Deal',
+      title:       'Buy 2 Get 10% OFF',
+      headline:    'Buy 2 Get 10% OFF (Storewide)',
+      period:      '7 – 12 Oct',
+      note:        'Exclude BUS & Curio Bundle',
+      pair:        ['Rinia', 'Ellen', 'Large Curvus Coffee', 'Large Fastforward']
     }
   },
 
@@ -205,77 +194,102 @@ const DATA = {
     shopee: {
       name: 'Shopee',
       accent: 'at-shopee',
+      campaignPeriod: '7 – 12 Oct',
       exclusiveOffers: [
         {
-          tag:      'Shopee Exclusive',
+          tag:      'Shopee Exclusive GWP',
           badge:    '🎁',
           title:    'Buy Curio — Free Cabin',
-          headline: 'Buy Large / Medium Curio → Free Cabin',
+          headline: 'Buy Large / Medium Curio → FREE Cabin Luggage',
           period:   '25 Sep – 11 Oct',
-          excludes: 'Excludes Aquatiawe & Raspberry colours',
+          excludes: 'Excludes color Aquatiawe & Raspberry',
           img:      'https://cf.shopee.com.my/file/my-11134207-820lh-mtiwnayqvmyqbb',
-          imgAlt:   'Curio Free Cabin Offer'
+          imgAlt:   'Curio Free Cabin'
         }
       ],
       newCustomer: [
-        { icon: '🎟️', label: 'New Follower (BAU)', amount: 'RM10 OFF', detail: 'No min spend · Storewide', tag: 'Storewide' },
-        { icon: '👤', label: 'New Buyer',           amount: 'RM20 OFF', detail: 'Min spend RM200',           tag: 'Exclude VB' }
+        { icon: '🎟️', label: 'New Follower (BAU)', amount: 'RM10 OFF', detail: 'No min spend · Storewide', tag: 'Storewide' }
       ],
       storeVouchers: [
-        { label: 'Store VC — Cash', amount: 'RM10 OFF', note: 'No min spend · Storewide', highlight: false },
-        { label: 'Store VC — 15%',  amount: '15% OFF',  note: 'No min spend · No cap', highlight: true,
-          products: ['Rinia (all colours)', 'Dashpop (all colours)', 'Ellen (all colours)', 'Curio (all colours)'] }
+        { label: 'Store Voucher — Cash', amount: 'RM15 OFF', note: 'No min spend · No cap (Storewide)', highlight: false },
+        { label: 'Store Voucher — 15%',  amount: '15% OFF',  note: 'No min spend · No cap', highlight: true,
+          products: ['Rinia', 'Ellen', 'Large Curvus Coffee', 'Large Fastforward'] }
       ],
       cofund: {
-        period:  '24 Sep 8PM – 10 Oct 11:59PM',
-        exclude: 'BUS, VB & Accessories',
+        period:  '7th Oct 12AM – 15th Oct 11:59PM',
+        exclude: 'BUS & Curio Bundle',
         tiers: [
-          { pct: '10% OFF', min: 'RM400', cap: 'RM40' },
-          { pct: '10% OFF', min: 'RM600', cap: 'RM60' }
+          { pct: '15% OFF', min: 'RM400', cap: 'RM100' },
+          { pct: '20% OFF', min: 'RM600', cap: 'RM200' }
         ]
       },
-      freeShipping: { label: 'Shopee Nationwide Shipping' }
+      livestreamDeals: {
+        coFundLive: {
+          title: 'Livestreaming Co-Fund Voucher',
+          discount: '25% OFF',
+          min: 'RM1,000',
+          cap: 'RM300',
+          split: 'Shopee 60% : Seller 40%'
+        },
+        flashSales: 'Paxtra 5% Discount Flash Sales',
+        exclusiveSkus: [
+          { name: 'Linex Sage Khaki & Titanium', discount: '50% OFF', qty: '50 pcs' },
+          { name: 'Curio Aquawative', discount: '50% OFF', qty: '50 pcs' },
+          { name: 'Curio Trunk Black', discount: '50% OFF', qty: '50 pcs' }
+        ]
+      },
+      freeShipping: {
+        tiers: [
+          { min: 'RM500', cap: 'RM50' },
+          { min: 'RM800', cap: 'RM80' }
+        ]
+      }
     },
 
     tiktok: {
       name: 'TikTok',
       accent: 'at-tiktokPink',
+      campaignPeriod: '7 – 12 Oct',
       exclusiveOffers: [],
-      newCustomer: [
-        { icon: '👤', label: 'New Buyer', amount: 'RM20 OFF', detail: 'Min spend RM200', tag: 'Exclude VB' }
-      ],
+      newCustomer: [],
       storeVouchers: [
-        { label: 'Store VC — Cash', amount: 'RM10 OFF', note: 'No min spend · Storewide', highlight: false },
-        { label: 'Store VC — 15%',  amount: '15% OFF',  note: 'No min spend · No cap', highlight: true,
-          products: ['Rinia (all colours)', 'Dashpop (all colours)', 'Ellen (all colours)', 'Curio (all colours)'] }
+        { label: 'Store Voucher — Cash', amount: 'RM15 OFF', note: 'No min spend · No cap (Storewide)', highlight: false },
+        { label: 'Store Voucher — 15%',  amount: '15% OFF',  note: 'No min spend · No cap', highlight: true,
+          products: ['Rinia', 'Ellen', 'Large Curvus Coffee', 'Large Fastforward'] }
       ],
       cofund: null,
-      freeShipping: { label: 'TikTok Shop Shipping' }
+      livestreamDeals: null,
+      freeShipping: {
+        tiers: [
+          { min: 'RM500', cap: 'RM50' },
+          { min: 'RM800', cap: 'RM80' }
+        ]
+      }
     }
   },
 
   exclusions: [
-    { title: 'BUS Lineup',   items: ['Excluded from <strong>Cofund VC 10% (RM400 &amp; RM600)</strong> — Shopee only'] },
-    { title: 'VB Lineup',    items: ['Excluded from <strong>New Buyer RM20 VC</strong>', 'Excluded from <strong>Cofund VC 10% (RM400 &amp; RM600)</strong> — Shopee only'] },
-    { title: 'Accessories',  items: ['Excluded from <strong>Cofund VC 10% (RM400 &amp; RM600)</strong> — Shopee only'] }
+    { title: 'BUS & Curio Bundle', items: ['Excluded from <strong>Cofund VC (15% & 20%)</strong>', 'Excluded from <strong>Buy 2 Get 10% OFF</strong> bundle deal'] },
+    { title: 'Curio Free Cabin Colours', items: ['Free cabin excludes <strong>Aquatiawe & Raspberry</strong> colours'] }
   ],
 
   scripts: {
     shopee: [
-      { title: '🎁 Curio Free Cabin',      tag: 'Shopee Deal',  text: 'Buy any Large or Medium Curio and get a FREE cabin — 25 September to 11 October only! Excludes Aquatiawe & Raspberry colours.' },
-      { title: '⭐ Ellen 3PC Set @ RM799', tag: 'Sept Special', text: 'September special — grab the Ellen 3PC Set at only RM799, from 12 to 30 September only!' },
-      { title: '🔥 Bundle Up & Save',      tag: 'Hero Pitch',   text: 'Buy 2 or more luggage items right now and enjoy an additional 20% OFF auto-discounted at checkout!' },
-      { title: '🎟️ New Buyer RM20 OFF',    tag: 'Conversion',   text: 'New to our Shopee store? Claim your RM20 OFF voucher with minimum spend RM200 — just tap the voucher!' },
-      { title: '💳 Store Voucher 15%',     tag: 'Voucher',      text: 'Stack our 15% Store Voucher — no minimum spend and no cap on Rinia, Dashpop, Ellen and Curio!' },
-      { title: '🤝 Cofund Savings',        tag: 'Cofund',       text: 'Spend RM400 and save up to RM40, or spend RM600 and save up to RM60 with our Cofund voucher!' },
-      { title: '🚚 Free Shipping',         tag: 'Shipping',     text: 'Free shipping voucher is live — capped at RM20 nationwide, don\'t forget to claim it before paying!' }
+      { title: '🎁 Curio Free Cabin',      tag: 'Shopee Deal',  text: 'Buy any Large or Medium Curio and get a FREE cabin! Valid 25 Sep – 11 Oct only. Excludes Aquatiawe & Raspberry colours.' },
+      { title: '🎟️ New Follower RM10',     tag: 'Follower',     text: 'Tap follow our Shopee store now to get RM10 OFF with no minimum spend across the entire store!' },
+      { title: '💳 RM15 No Min Spend',     tag: 'Store Voucher',text: 'Claim your RM15 OFF store voucher right now — zero minimum spend and no cap, storewide!' },
+      { title: '🔥 15% OFF Hot SKUs',      tag: '15% Voucher',  text: 'Enjoy 15% OFF with no min spend and no cap on Rinia, Ellen, Large Curvus Coffee, and Large Fastforward!' },
+      { title: '🤝 Cofund 15% & 20%',      tag: 'Cofund',       text: 'Shopee Cofund: Spend RM400 save up to RM100 (15% OFF), or spend RM600 save up to RM200 (20% OFF)! Valid 7–15 Oct.' },
+      { title: '📺 Live Co-Fund 25% OFF',  tag: 'Live Exclusive', text: 'Exclusive for this livestream: 25% OFF with min spend RM1,000, capped at RM300! Limited platform vouchers!' },
+      { title: '⚡ 50% OFF 3 SKUs (50pcs)',tag: 'Flash Promo',  text: 'Only 50 pcs available at 50% OFF: Linex Sage Khaki & Titanium, Curio Aquawative, and Curio Trunk Black! Lock your order now!' },
+      { title: '📦 Buy 2 Get 10% OFF',     tag: 'Bundle Up',    text: 'Checkout 2 items together to instantly enjoy an extra 10% OFF bundle discount! (Excludes BUS & Curio Bundle).' },
+      { title: '🚚 Free Shipping Up to RM80', tag: 'Shipping',  text: 'Free Shipping nationwide: Min spend RM500 capped RM50, min spend RM800 capped RM80!' }
     ],
     tiktok: [
-      { title: '⭐ Ellen 3PC Set @ RM799', tag: 'Sept Special', text: 'September special — Ellen 3PC Set at only RM799, from 12 to 30 September only!' },
-      { title: '🔥 Bundle Up & Save',      tag: 'Hero Pitch',   text: 'Checkout 2 items together in your TikTok cart to instantly unlock extra 20% OFF!' },
-      { title: '🎟️ New Buyer RM20 OFF',    tag: 'Conversion',   text: 'First time buying on our TikTok LIVE? Tap the yellow bag to claim RM20 OFF on RM200!' },
-      { title: '💳 Store VC 15%',          tag: 'Voucher',      text: 'Stack our 15% Store Voucher — no minimum spend and no cap on Rinia, Dashpop, Ellen and Curio!' },
-      { title: '🚚 Free Shipping',         tag: 'Shipping',     text: 'Free Shipping voucher is live inside the yellow bag — capped at RM20, claim it before paying!' }
+      { title: '💳 RM15 No Min Spend',     tag: 'Storewide',    text: 'Claim RM15 OFF with zero minimum spend and no cap across the entire store on TikTok Shop!' },
+      { title: '🔥 15% OFF Selected',      tag: '15% Voucher',  text: 'Get 15% OFF no min spend and no cap on Rinia, Ellen, Large Curvus Coffee, and Large Fastforward!' },
+      { title: '📦 Buy 2 Get 10% OFF',     tag: 'Bundle',       text: 'Buy 2 items together to get an instant 10% OFF discount! (Excludes BUS & Curio Bundle).' },
+      { title: '🚚 Free Shipping Subsidies',tag: 'Shipping',    text: 'Free shipping nationwide: Spend RM500 for RM50 cap, or spend RM800 for RM80 shipping subsidy!' }
     ]
   }
 };
@@ -295,15 +309,8 @@ function setUpdatedTime() {
 
 /* ---- At-a-glance strip ---------------------------------- */
 function renderGlance() {
-  const { ellen, bundle, payday, freeShipping } = DATA.shared;
   const g = DATA.ui.glance;
-
-  const cards = [
-    { ...g.septSpecial, value: ellen.title,        sub: '@ ' + ellen.price },
-    { ...g.hero,        value: bundle.glanceValue, sub: bundle.glanceSub },
-    { ...g.payday,      value: payday.status,      sub: payday.period },
-    { ...g.shipping,    value: freeShipping.value, sub: freeShipping.sub }
-  ];
+  const cards = [g.hero, g.bundle, g.storeVc, g.shipping];
 
   $('glance').innerHTML = cards.map(c => `
     <div class="bg-white rounded-2xl border border-slate-200 shadow-card p-4 flex flex-col gap-1">
@@ -316,67 +323,36 @@ function renderGlance() {
   `).join('');
 }
 
-/* ---- TOP OFFERS: Curio first, then Ellen, then Bundle ---- */
+/* ---- TOP OFFERS ---- */
 function renderTopOffers(platformKey) {
-  const { ellen, bundle } = DATA.shared;
+  const { bundle } = DATA.shared;
   const ui = DATA.ui.topOffers;
   const p  = DATA.platforms[platformKey];
 
-  const ellenCard = `
-    <article class="relative overflow-hidden bg-gradient-to-r from-pink-50 via-white to-rose-50 rounded-3xl border-2 border-pink-300/60 p-5 sm:p-6 shadow-card">
-      <span class="absolute top-0 right-0 bg-pink-500 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
-        ${ui.specialBadge} ${esc(ellen.tag)}
-      </span>
-      <div class="flex flex-col lg:flex-row items-center gap-6">
-        <div class="flex-1 space-y-3 w-full">
-          <span class="inline-flex items-center gap-2 bg-pink-500/10 text-pink-600 px-3 py-1 rounded-full text-xs font-extrabold">
-            <i class="fa-solid fa-star"></i> ${esc(ellen.title)} — ${esc(ui.specialPriceTag)}
-          </span>
-          <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-            ${esc(ellen.title)} → <span class="text-pink-600">@ ${esc(ellen.price)}</span>
-          </h2>
-          <p class="text-xs text-slate-600 font-medium">
-            <i class="fa-regular fa-calendar text-pink-500 mr-1"></i>
-            ${esc(ui.periodLabel)}: <strong>${esc(ellen.period)}</strong>
-          </p>
-        </div>
-        <div class="w-full lg:w-56 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm flex flex-col items-center">
-          <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">${esc(ellen.title)}</span>
-          <img src="${ellen.img}" alt="${esc(ellen.alt)}" class="h-28 sm:h-32 object-contain"
-               onerror="this.src='https://placehold.co/150x150/fce7f3/be185d?text=ELLEN+3PC'">
-          <span class="text-[11px] text-pink-600 font-semibold mt-2">${esc(ellen.period)}</span>
-        </div>
-      </div>
-    </article>
-  `;
-
   const bundleCard = `
-    <article class="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl border-2 border-at-shopee/30 p-5 sm:p-6 shadow-card">
-      <span class="absolute top-0 right-0 bg-at-shopee text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
+    <article class="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl border-2 border-at-orange/30 p-5 sm:p-6 shadow-card">
+      <span class="absolute top-0 right-0 bg-at-orange text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
         ${ui.heroBadge} ${esc(bundle.tag)}
       </span>
       <div class="flex flex-col lg:flex-row items-center gap-6">
         <div class="flex-1 space-y-3 w-full">
-          <span class="inline-flex items-center gap-2 bg-at-shopee/10 text-at-shopee px-3 py-1 rounded-full text-xs font-extrabold">
+          <span class="inline-flex items-center gap-2 bg-at-orange/10 text-at-orange px-3 py-1 rounded-full text-xs font-extrabold">
             <i class="fa-solid fa-bolt"></i> ${esc(bundle.title)}
           </span>
           <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
             ${esc(bundle.headline)}
           </h2>
           <p class="text-xs text-slate-600 font-medium">
-            <i class="fa-regular fa-calendar text-at-shopee mr-1"></i>
+            <i class="fa-regular fa-calendar text-at-orange mr-1"></i>
             ${esc(ui.periodLabel)}: <strong>${esc(bundle.period)}</strong>
+            <span class="ml-2 text-red-600 font-bold">(${esc(bundle.note)})</span>
           </p>
         </div>
-        <div class="w-full lg:w-56 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm flex flex-col items-center">
-          <span class="text-[10px] font-bold text-slate-400 uppercase mb-2">${esc(ui.eligiblePairLabel)}</span>
-          <div class="flex items-center gap-2">
-            <img src="${bundle.imgA}" alt="${esc(bundle.pair[0])}" class="h-20 sm:h-24 object-contain"
-                 onerror="this.src='https://placehold.co/120x120/f1f5f9/002244?text=SQUASEM'">
-            <img src="${bundle.imgB}" alt="${esc(bundle.pair[1])}" class="h-20 sm:h-24 object-contain"
-                 onerror="this.src='https://placehold.co/120x120/f1f5f9/002244?text=INSTAGON'">
-          </div>
-          <span class="text-[11px] font-extrabold text-slate-800 mt-2">${esc(bundle.pair.join(' + '))}</span>
+        <div class="w-full lg:w-72 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm">
+          <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Eligible 15% Store VC SKUs</span>
+          <ul class="text-[11px] font-extrabold text-slate-800 space-y-0.5">
+            ${bundle.pair.map(p => `<li>• ${esc(p)}</li>`).join('')}
+          </ul>
         </div>
       </div>
     </article>
@@ -385,24 +361,24 @@ function renderTopOffers(platformKey) {
   const exclusiveCards = (p.exclusiveOffers || []).map(o => {
     const ui2 = DATA.ui.exclusive;
     return `
-      <article class="relative overflow-hidden bg-gradient-to-r from-orange-50 via-white to-amber-50 rounded-3xl border-2 border-at-shopee/40 p-5 sm:p-6 shadow-card">
-        <span class="absolute top-0 right-0 bg-at-shopee text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
-          ${o.badge || ui2.giftIcon} ${esc(o.tag)}
+      <article class="relative overflow-hidden bg-gradient-to-r from-pink-50 via-white to-rose-50 rounded-3xl border-2 border-pink-300 p-5 sm:p-6 shadow-card">
+        <span class="absolute top-0 right-0 bg-pink-600 text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-bl-2xl">
+          ${o.badge || '🎁'} ${esc(o.tag)}
         </span>
         <div class="flex flex-col lg:flex-row items-center gap-6">
           <div class="flex-1 space-y-3 w-full">
-            <span class="inline-flex items-center gap-2 bg-at-shopee/10 text-at-shopee border border-at-shopee/20 px-3 py-1 rounded-full text-xs font-extrabold">
+            <span class="inline-flex items-center gap-2 bg-pink-500/10 text-pink-600 border border-pink-200 px-3 py-1 rounded-full text-xs font-extrabold">
               <i class="fa-solid ${ui2.giftIcon}"></i> ${esc(o.title)}
             </span>
             <h2 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
               ${esc(o.headline)}
             </h2>
             <p class="text-xs text-slate-600 font-medium">
-              <i class="fa-regular fa-calendar text-at-shopee mr-1"></i>
+              <i class="fa-regular fa-calendar text-pink-600 mr-1"></i>
               ${esc(ui.periodLabel)}: <strong>${esc(o.period)}</strong>
             </p>
             ${o.excludes ? `
-              <p class="text-[11px] text-red-600 font-semibold">
+              <p class="text-[11px] text-red-600 font-bold">
                 <i class="fa-solid ${ui2.warnIcon} mr-1"></i>${esc(o.excludes)}
               </p>` : ''}
           </div>
@@ -415,15 +391,14 @@ function renderTopOffers(platformKey) {
     `;
   }).join('');
 
-  // ⬇️ Curio (exclusive cards) first, then Ellen, then Bundle
-  $('top-offers').innerHTML = exclusiveCards + ellenCard + bundleCard;
+  $('top-offers').innerHTML = exclusiveCards + bundleCard;
 }
 
 /* ---- Vouchers & Benefits section ------------------------ */
 function renderVouchers(p) {
   const ui = DATA.ui.vouchers;
 
-  const newCustomer = p.newCustomer.length ? `
+  const newCustomer = p.newCustomer && p.newCustomer.length ? `
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       ${p.newCustomer.map(v => `
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-card flex gap-4">
@@ -491,15 +466,59 @@ function renderVouchers(p) {
     </div>
   ` : '';
 
+  const livestreamSection = p.livestreamDeals ? `
+    <div class="space-y-3">
+      <h4 class="text-xs sm:text-sm font-extrabold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+        <i class="fa-solid fa-video text-red-500"></i> ${esc(ui.livestreamHeading)}
+      </h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-gradient-to-br from-indigo-50 to-white p-5 rounded-2xl border-2 border-indigo-200 shadow-sm">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-extrabold text-indigo-700 uppercase">${esc(p.livestreamDeals.coFundLive.title)}</span>
+            <span class="text-[10px] bg-indigo-100 text-indigo-800 px-2 py-0.5 rounded font-bold">${esc(p.livestreamDeals.coFundLive.split)}</span>
+          </div>
+          <div class="text-3xl font-black text-indigo-900 mt-1">${esc(p.livestreamDeals.coFundLive.discount)}</div>
+          <div class="text-xs font-bold text-slate-700 mt-1">Min spend ${esc(p.livestreamDeals.coFundLive.min)} | Cap ${esc(p.livestreamDeals.coFundLive.cap)}</div>
+          <p class="text-[11px] text-slate-500 mt-2">Special Shopee co-funded voucher for live stream sessions.</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-amber-50 to-white p-5 rounded-2xl border-2 border-amber-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-extrabold text-amber-800 uppercase">Flash Sales Feature</span>
+              <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">Limited</span>
+            </div>
+            <div class="text-xl font-black text-slate-900 mt-1">${esc(p.livestreamDeals.flashSales)}</div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-amber-200/60">
+            <span class="text-[10px] font-bold text-slate-500 uppercase block mb-1">3 SKUs 50% OFF (Qty 50 pcs each):</span>
+            <div class="grid grid-cols-1 gap-1 text-xs font-bold text-slate-800">
+              ${p.livestreamDeals.exclusiveSkus.map(s => `
+                <div class="flex justify-between items-center bg-white px-2 py-1 rounded border border-amber-100">
+                  <span>${esc(s.name)}</span>
+                  <span class="text-rose-600 font-extrabold">${esc(s.discount)} · ${esc(s.qty)}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ` : '';
+
   const shipping = `
     <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-start gap-4">
       <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl shrink-0">🚚</div>
       <div class="flex-1">
-        <span class="text-[10px] font-extrabold text-purple-600 uppercase">${esc(p.freeShipping.label)}</span>
-        <div class="text-lg font-black text-slate-900 mt-0.5">Free Shipping — Capped at ${esc(DATA.shared.freeShipping.value.replace('Capped ', ''))}</div>
-        <div class="mt-2 flex justify-between bg-purple-50 p-2 rounded-lg border border-purple-100 text-xs">
-          <span>${esc(ui.shippingCapLabel)}</span>
-          <strong class="text-purple-700">${esc(DATA.shared.freeShipping.value.replace('Capped ', ''))}</strong>
+        <span class="text-[10px] font-extrabold text-purple-600 uppercase">Free Shipping Nationwide</span>
+        <div class="text-lg font-black text-slate-900 mt-0.5">Free Shipping Subsidies (7 – 12 Oct)</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2">
+          ${p.freeShipping.tiers.map(t => `
+            <div class="flex justify-between bg-purple-50 p-2.5 rounded-lg border border-purple-100 text-xs">
+              <span>Min Spend <strong>${esc(t.min)}</strong></span>
+              <strong class="text-purple-700">Capped ${esc(t.cap)}</strong>
+            </div>
+          `).join('')}
         </div>
       </div>
     </div>
@@ -512,7 +531,7 @@ function renderVouchers(p) {
       </div>
       <div>
         <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">${esc(ui.heading)}</h2>
-        <p class="text-[11px] text-slate-500">${esc(p.name)} — active vouchers & shipping benefits</p>
+        <p class="text-[11px] text-slate-500">${esc(p.name)} (${esc(p.campaignPeriod)}) — active vouchers & shipping benefits</p>
       </div>
     </div>
 
@@ -520,6 +539,7 @@ function renderVouchers(p) {
       ${newCustomer}
       ${storeVc}
       ${cofund}
+      ${livestreamSection}
       ${shipping}
     </div>
   `;
@@ -538,7 +558,7 @@ function renderExclusions() {
           <p class="text-[11px] text-red-700">${esc(ui.subtitle)}</p>
         </div>
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         ${DATA.exclusions.map(x => `
           <div class="bg-white p-4 rounded-2xl border border-red-200 shadow-sm">
             <span class="bg-red-100 text-red-800 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase">${esc(ui.badge)}</span>
