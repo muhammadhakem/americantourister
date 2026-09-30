@@ -186,7 +186,28 @@ const DATA = {
       headline:    'Buy 2 Get 10% OFF (Storewide)',
       period:      '7 – 12 Oct',
       note:        'Exclude BUS & Curio Bundle',
-      pair:        ['Rinia', 'Ellen', 'Large Curvus Coffee', 'Large Fastforward']
+      skus: [
+        {
+          name: 'Rinia',
+          detail: 'All Colours',
+          img: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw48c05c1f/images/rinia-3pc-set-tsa/hi-res/159171-1832_hi-res_FRONT34_1.jpg'
+        },
+        {
+          name: 'Ellen',
+          detail: 'All Colours',
+          img: 'https://cf.shopee.com.my/file/my-11134207-820lg-msxsk8ggbjlxa2'
+        },
+        {
+          name: 'Curvus Coffee',
+          detail: 'Large Size',
+          img: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dwc69ae7b2/images/curvus-spinner-tsa/hi-res/157426_A728_hi-res_FRONT34_1.jpg'
+        },
+        {
+          name: 'Fastforward',
+          detail: 'Large Size',
+          img: 'https://www.americantourister.com.sg/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw2327bc91/images/fast-forward-tsa-exp/hi-res/155261-361E_hi-res_FRONT34_1.jpg'
+        }
+      ]
     }
   },
 
@@ -231,11 +252,30 @@ const DATA = {
           cap: 'RM300',
           split: 'Shopee 60% : Seller 40%'
         },
-        flashSales: 'Paxtra 5% Discount Flash Sales',
+        flashSales: {
+          title: 'Flash Sales',
+          item: 'Paxtra 5% discount flash sales',
+          img: 'https://www.americantourister.com.sg/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw4205badb/images/paxtra-tsa/hi-res/157265-1408_hi-res_FRONT34_1.jpg'
+        },
         exclusiveSkus: [
-          { name: 'Linex Sage Khaki & Titanium', discount: '50% OFF', qty: '50 pcs' },
-          { name: 'Curio Aquawative', discount: '50% OFF', qty: '50 pcs' },
-          { name: 'Curio Trunk Black', discount: '50% OFF', qty: '50 pcs' }
+          {
+            name: 'Linex Sage Khaki & Titanium',
+            discount: '50% OFF',
+            qty: '50 pcs',
+            img: 'https://www.americantourister.com.sg/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw6e83c57d/images/linex-tsa-r-v2/hi-res/157410-425E_hi-res_FRONT34_1.jpg'
+          },
+          {
+            name: 'Curio Aquawative',
+            discount: '50% OFF',
+            qty: '50 pcs',
+            img: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw791fe8ba/images/curio-book-opening-v2/hi-res/156739_A643_hi-res_FRONT34_1.jpg'
+          },
+          {
+            name: 'Curio Trunk Black',
+            discount: '50% OFF',
+            qty: '50 pcs',
+            img: 'https://www.americantourister.com.my/dw/image/v2/AAWQ_PRD/on/demandware.static/-/Sites-American-Tourister/default/dw0e9abfd1/images/curio-book-opening-v2/hi-res/156737_2012_hi-res_FRONT34_1.jpg'
+          }
         ]
       },
       freeShipping: {
@@ -269,8 +309,8 @@ const DATA = {
   },
 
   exclusions: [
-    { title: 'BUS & Curio Bundle', items: ['Excluded from <strong>Cofund VC (15% & 20%)</strong>', 'Excluded from <strong>Buy 2 Get 10% OFF</strong> bundle deal'] },
-    { title: 'Curio Free Cabin Colours', items: ['Free cabin excludes <strong>Aquatiawe & Raspberry</strong> colours'] }
+    { title: 'BUS & Curio Bundle', items: ['Excluded from <strong>Cofund VC (15% & 20%)</strong> [Shopee]', 'Excluded from <strong>Buy 2 Get 10% OFF</strong> bundle deal [Shopee & TikTok]'] },
+    { title: 'Curio Free Cabin Colours', items: ['Free cabin excludes <strong>Aquatiawe & Raspberry</strong> colours [Shopee GWP only]'] }
   ],
 
   scripts: {
@@ -308,9 +348,15 @@ function setUpdatedTime() {
 }
 
 /* ---- At-a-glance strip ---------------------------------- */
-function renderGlance() {
+function renderGlance(platformKey) {
   const g = DATA.ui.glance;
-  const cards = [g.hero, g.bundle, g.storeVc, g.shipping];
+  const cards = platformKey === 'tiktok'
+    ? [g.storeVc, g.bundle, g.shipping]
+    : [g.hero, g.bundle, g.storeVc, g.shipping];
+
+  $('glance').className = platformKey === 'tiktok'
+    ? 'grid grid-cols-1 sm:grid-cols-3 gap-3'
+    : 'grid grid-cols-2 lg:grid-cols-4 gap-3';
 
   $('glance').innerHTML = cards.map(c => `
     <div class="bg-white rounded-2xl border border-slate-200 shadow-card p-4 flex flex-col gap-1">
@@ -348,11 +394,18 @@ function renderTopOffers(platformKey) {
             <span class="ml-2 text-red-600 font-bold">(${esc(bundle.note)})</span>
           </p>
         </div>
-        <div class="w-full lg:w-72 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm">
-          <span class="text-[10px] font-bold text-slate-400 uppercase block mb-1">Eligible 15% Store VC SKUs</span>
-          <ul class="text-[11px] font-extrabold text-slate-800 space-y-0.5">
-            ${bundle.pair.map(p => `<li>• ${esc(p)}</li>`).join('')}
-          </ul>
+        <div class="w-full lg:w-80 bg-white rounded-2xl p-4 border border-slate-200 text-center shadow-sm">
+          <span class="text-[10px] font-bold text-slate-400 uppercase block mb-2">Eligible 15% Store VC SKUs</span>
+          <div class="grid grid-cols-2 gap-2">
+            ${bundle.skus.map(s => `
+              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-2 flex flex-col items-center text-center">
+                <img src="${s.img}" alt="${esc(s.name)}" class="h-16 sm:h-20 object-contain mb-1"
+                     onerror="this.src='https://placehold.co/100x100/f1f5f9/002244?text=${encodeURIComponent(s.name)}'">
+                <div class="text-[11px] font-extrabold text-slate-900 leading-tight">${esc(s.name)}</div>
+                <div class="text-[9px] font-semibold text-slate-500 mt-0.5">${esc(s.detail)}</div>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     </article>
@@ -483,20 +536,27 @@ function renderVouchers(p) {
         </div>
 
         <div class="bg-gradient-to-br from-amber-50 to-white p-5 rounded-2xl border-2 border-amber-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-extrabold text-amber-800 uppercase">Flash Sales Feature</span>
-              <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">Limited</span>
+          <div class="flex items-start gap-4">
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <span class="text-[10px] font-extrabold text-amber-800 uppercase">Flash Sales Feature</span>
+                <span class="text-[10px] bg-red-100 text-red-700 px-2 py-0.5 rounded font-bold">Limited</span>
+              </div>
+              <div class="text-xl font-black text-slate-900 mt-1">${esc(p.livestreamDeals.flashSales.item)}</div>
+              <p class="text-[11px] text-slate-500 mt-1">Paxtra collection available with 5% discount flash sales.</p>
             </div>
-            <div class="text-xl font-black text-slate-900 mt-1">${esc(p.livestreamDeals.flashSales)}</div>
+            <img src="${p.livestreamDeals.flashSales.img}" alt="Paxtra" class="h-20 sm:h-24 w-20 object-contain rounded-xl bg-white border border-amber-100 p-1"
+                 onerror="this.src='https://placehold.co/100x100/fff7ed/d97706?text=PAXTRA'">
           </div>
-          <div class="mt-3 pt-2 border-t border-amber-200/60">
-            <span class="text-[10px] font-bold text-slate-500 uppercase block mb-1">3 SKUs 50% OFF (Qty 50 pcs each):</span>
-            <div class="grid grid-cols-1 gap-1 text-xs font-bold text-slate-800">
+          <div class="mt-4 pt-3 border-t border-amber-200/60">
+            <span class="text-[10px] font-bold text-slate-500 uppercase block mb-2">3 SKUs 50% OFF (Qty 50 pcs each):</span>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
               ${p.livestreamDeals.exclusiveSkus.map(s => `
-                <div class="flex justify-between items-center bg-white px-2 py-1 rounded border border-amber-100">
-                  <span>${esc(s.name)}</span>
-                  <span class="text-rose-600 font-extrabold">${esc(s.discount)} · ${esc(s.qty)}</span>
+                <div class="flex flex-col items-center text-center bg-white p-2 rounded-xl border border-amber-100 shadow-2xs">
+                  <img src="${s.img}" alt="${esc(s.name)}" class="h-16 w-16 object-contain mb-1"
+                       onerror="this.src='https://placehold.co/80x80/fff7ed/d97706?text=LUGGAGE'">
+                  <span class="text-[11px] font-bold text-slate-900 leading-tight">${esc(s.name)}</span>
+                  <span class="text-[10px] text-rose-600 font-extrabold mt-0.5">${esc(s.discount)} · ${esc(s.qty)}</span>
                 </div>
               `).join('')}
             </div>
@@ -640,6 +700,7 @@ function switchPlatform(key) {
     key === 'shopee' ? 'bg-at-shopee text-white' : 'bg-black text-white'
   }`;
 
+  renderGlance(key);
   renderTopOffers(key);
   renderVouchers(p);
   renderScripts(key);
@@ -673,7 +734,6 @@ document.addEventListener('click', (e) => {
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
   setUpdatedTime();
-  renderGlance();
   renderExclusions();
   renderFooter();
   switchPlatform('shopee');
